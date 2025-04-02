@@ -9,9 +9,6 @@ export const ComponentScreen: React.FC = () => {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Text style={{ color: colors.text }}>组件页面</Text>
-      <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
-        <Text style={{ color: colors.primary }}>这是一个使用主题颜色的卡片</Text>
-      </View>
     </View>
   );
 };
