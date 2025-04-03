@@ -1,3 +1,6 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",  // 修改为支持动态导入的模块类型
+  },
 }
