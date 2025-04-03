@@ -1,11 +1,12 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useTheme } from "../../../theme/ThemeContext";
+import {StyleSheet, Text, View} from 'react-native';
+import {useTheme} from '../../../theme/ThemeContext';
+import React from 'react';
 
 export const ModalDetailScreen: React.FC = () => {
-    const { colors } = useTheme();
+    const {colors} = useTheme();
     return (
-        <View style={[styles.detailContainer, { backgroundColor: colors.background }]}>
-            <Text style={{ color: colors.text, fontSize: 20, fontWeight: 'bold' }}>弹窗组件详情</Text>
+        <View style={[styles.detailContainer, {backgroundColor: colors.background}]}>
+            <Text style={{color: colors.text, fontSize: 20, fontWeight: 'bold'}}>弹窗组件详情</Text>
         </View>
     );
 };

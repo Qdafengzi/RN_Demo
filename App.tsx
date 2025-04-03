@@ -1,5 +1,5 @@
-import React, {lazy, Suspense, useEffect, useRef, useState} from 'react';
-import {NavigationContainer, NavigationContainerRef, useRoute} from '@react-navigation/native';
+import React, {lazy, Suspense, useRef, useState} from 'react';
+import {NavigationContainer, NavigationContainerRef} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {ThemeProvider, useTheme} from './src/theme/ThemeContext';
@@ -11,10 +11,10 @@ import {enableScreens} from 'react-native-screens';
 enableScreens();
 
 // 禁用默认加载指示器
-LogBox.ignoreLogs(['Sending']);
+LogBox.ignoreLogs(['loading']);
 
 // 使用懒加载替代直接导入
-const ComponentScreen = lazy(() => import('./src/pages/component/ComponentScreen').then(module => ({default: module.ComponentScreen})));
+const HomeScreen = lazy(() => import('./src/pages/component/HomeScreen.tsx').then(module => ({default: module.HomeScreen})));
 const NativeScreen = lazy(() => import('./src/pages/native/NativeScreen').then(module => ({default: module.NativeScreen})));
 const OtherScreen = lazy(() => import('./src/pages/other/OtherScreen').then(module => ({default: module.OtherScreen})));
 
@@ -23,9 +23,9 @@ const OtherScreen = lazy(() => import('./src/pages/other/OtherScreen').then(modu
 const Tab = createBottomTabNavigator();
 
 // 包装懒加载组件
-const LazyComponentScreen = () => (
+const LazyHomeScreen = () => (
     <Suspense fallback={<LoadingScreen/>}>
-        <ComponentScreen/>
+        <HomeScreen/>
     </Suspense>
 );
 
@@ -44,79 +44,47 @@ const LazyOtherScreen = () => (
 function MainNavigator() {
     const {colors} = useTheme();
     const navigationRef = useRef<NavigationContainerRef<any>>(null);
-    const routeNameRef = useRef(null);
-    const [tabBarHide, setTabBarHide] = useState(false)
-    // const route = useRoute();
-
-    useEffect(() => {
-        console.log("导航",routeNameRef)
-
-    }, []);
+    const [tabBarHide, setTabBarHide] = useState(false);
 
     return (
-        <NavigationContainer fallback={null}
-                             ref={navigationRef}
-                             onStateChange={(state) => {
-                                 // 每次导航状态变化时触发
-                                 console.log(`当前的状态state:`,state)
-                                 // console.log(`当前的状态`,navigationRef.current?.getCurrentRoute().name);
-                                 const  currentRouteName = navigationRef.current?.getCurrentRoute()?.name ?? '';
-                                     // (navigationRef.current as NavigationContainerRef<any>?).getCurrentRoute().name
-                                 // const currentRouteName = navigationRef.current?.getCurrentRoute().name;
-
-                                 // console.log(`当前导航的:${route.name}`);
-
-
-                                 if (currentRouteName === 'ComponentList' ||  currentRouteName === '原生' ||currentRouteName === '其他') {
-                                     setTabBarHide(false);
-                                 } else {
-                                     setTabBarHide(true);
-                                 }
-
-
-                                 // const currentRoute = navigationRef.current?.getCurrentRoute();
-                                 // console.log('导航状态变化:', currentRoute?.name);
-                                 //
-                                 // // 根据路由名称判断是否显示底部标签栏
-                                 // // 例如，如果不是主页面，则隐藏底部标签栏
-                                 // const isMainScreen = ['首页', '原生', '其他', 'ComponentList'].includes(currentRoute?.name || '');
-                                 //
-                                 // // 这里可以通过其他方式动态修改底部标签栏的显示状态
-                                 // // 例如使用全局状态管理或Context
-                             }}
+        <NavigationContainer
+            fallback={null}
+            ref={navigationRef}
+            onStateChange={(_) => {
+                const currentRouteName = navigationRef.current?.getCurrentRoute()?.name ?? '';
+                console.log(`当前导航的:${currentRouteName}`);
+                if (currentRouteName === 'ComponentList' || currentRouteName === '原生' || currentRouteName === '其他') {
+                    setTabBarHide(false);
+                } else {
+                    setTabBarHide(true);
+                }
+            }}
         >
             <Tab.Navigator
+                initialRouteName={'首页'}
                 screenOptions={({route}) => ({
                     tabBarIcon: ({focused, color, size}) => {
+                        console.log(`route:${route.name}`);
+                        let icon = require('./src/assets/images/ic_home.png');
                         if (route.name === '首页') {
-                            // 使用本地图片作为图标
-                            return (
-                                <Image
-                                    source={require('./src/assets/images/home_active.png')}
-                                    style={{width: size, height: size, tintColor: color, opacity: focused ? 1 : 0.5}}
-                                />
-                            );
+                            icon = require('./src/assets/images/ic_home.png');
                         } else if (route.name === '原生') {
-                            return (
-                                <Image
-                                    source={require('./src/assets/images/home_active.png')}
-                                    style={{width: size, height: size, tintColor: color, opacity: focused ? 1 : 0.5}}
-                                />
-                            );
+                            icon = require('./src/assets/images/ic_home_native.png');
                         } else if (route.name === '其他') {
-                            return (
-                                <Image
-                                    source={require('./src/assets/images/home_active.png')}
-                                    style={{width: size, height: size, tintColor: color, opacity: focused ? 1 : 0.5}}
-                                />
-                            );
+                            icon = require('./src/assets/images/ic_home_other.png');
                         }
-                        return null;
+                        return (
+                            <Image
+                                source={icon}
+                                style={{width: size, height: size, tintColor: color, opacity: focused ? 1 : 0.5}}
+                            />
+                        );
                     },
-                    tabBarActiveTintColor: colors.primary,
+                    tabBarActiveTintColor: colors.text,
                     tabBarLabelStyle: {
                         fontSize: 12,
                         fontWeight: 'bold',
+                        color: colors.text,
                     },
                     tabBarInactiveTintColor: colors.text,
                     tabBarShowLabel: true,
@@ -127,7 +95,9 @@ function MainNavigator() {
                     },
                     tabBarStyle: {
                         display: tabBarHide ? 'none' : 'flex',
+                        backgroundColor: colors.background,
                     },
+                    tabBarActiveBackgroundColor:colors.card,
                     headerStyle: {
                         backgroundColor: colors.background,
                     },
@@ -144,7 +114,7 @@ function MainNavigator() {
                 })}>
 
 
-                <Tab.Screen name="首页" component={LazyComponentScreen}/>
+                <Tab.Screen name="首页" component={LazyHomeScreen}/>
                 <Tab.Screen name="原生" component={LazyNativeScreen}/>
                 <Tab.Screen name="其他" component={LazyOtherScreen}/>
             </Tab.Navigator>

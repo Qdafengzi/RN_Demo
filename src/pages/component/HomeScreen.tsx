@@ -66,15 +66,15 @@ const LazyScrollViewDetailScreen = () => (
 );
 
 // 主组件页面，包含嵌套导航
-export const ComponentScreen: React.FC = () => {
-  usePageReport('ComponentScreen');
+export const HomeScreen: React.FC = () => {
+  usePageReport('HomeScreen');
 
   return (
       <Stack.Navigator
           initialRouteName="ComponentList"
-          screenOptions={({ route }) => ({
-            headerShown: route.name !== 'ComponentList',
-            headerTitleAlign: 'center',
+          screenOptions={({route}) => ({
+              headerShown: route.name !== 'ComponentList',
+              headerTitleAlign: 'center',
           })}
       >
         <Stack.Screen

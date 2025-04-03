@@ -1,15 +1,21 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useTheme } from "../../../theme/ThemeContext";
+import {StyleSheet, Text, View} from 'react-native';
+import {useTheme} from '../../../theme/ThemeContext';
+import React from 'react';
 
 export const TextDetailScreen: React.FC = () => {
-    const { colors } = useTheme();
+    const {colors} = useTheme();
     return (
-        <View style={[styles.detailContainer, { backgroundColor: colors.background }]}>
-            <Text style={{ color: colors.text, fontSize: 20, fontWeight: 'bold', marginBottom: 20 }}>文本组件详情</Text>
-            <Text style={{ color: colors.text, fontSize: 16, marginBottom: 10 }}>普通文本</Text>
-            <Text style={{ color: colors.text, fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>粗体文本</Text>
-            <Text style={{ color: colors.text, fontSize: 16, fontStyle: 'italic', marginBottom: 10 }}>斜体文本</Text>
-            <Text style={{ color: colors.text, fontSize: 16, textDecorationLine: 'underline', marginBottom: 10 }}>下划线文本</Text>
+        <View style={[styles.detailContainer, {backgroundColor: colors.background}]}>
+            <Text style={{color: colors.text, fontSize: 20, fontWeight: 'bold', marginBottom: 20}}>文本组件详情</Text>
+            <Text style={{color: colors.text, fontSize: 16, marginBottom: 10}}>普通文本</Text>
+            <Text style={{color: colors.text, fontSize: 20, fontWeight: 'bold', marginBottom: 10}}>粗体文本</Text>
+            <Text style={{color: colors.text, fontSize: 16, fontStyle: 'italic', marginBottom: 10}}>斜体文本</Text>
+            <Text style={{
+                color: colors.text,
+                fontSize: 16,
+                textDecorationLine: 'underline',
+                marginBottom: 10,
+            }}>下划线文本</Text>
         </View>
     );
 };

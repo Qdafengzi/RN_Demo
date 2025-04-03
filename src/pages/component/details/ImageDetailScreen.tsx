@@ -1,5 +1,6 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useTheme } from "../../../theme/ThemeContext";
+import { StyleSheet, Text, View } from 'react-native';
+import { useTheme } from '../../../theme/ThemeContext';
+import React from 'react';
 
 export const ImageDetailScreen: React.FC = () => {
     const { colors } = useTheme();

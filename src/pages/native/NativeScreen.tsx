@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { useTheme } from '../../theme/ThemeContext';
+import React from 'react';
 
 export function NativeScreen(): React.JSX.Element {
     const { colors } = useTheme();

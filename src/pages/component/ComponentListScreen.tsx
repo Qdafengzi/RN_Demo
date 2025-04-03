@@ -1,7 +1,6 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useTheme } from "../../theme/ThemeContext";
-
-
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useTheme } from '../../theme/ThemeContext';
+import React from 'react';
 
 /// 定义组件列表数据
 const componentList = [

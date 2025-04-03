@@ -1,23 +1,24 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useTheme } from "../../../theme/ThemeContext";
-import { usePageReport } from "../../../hooks/usePageReport";
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useTheme} from '../../../theme/ThemeContext';
+import {usePageReport} from '../../../hooks/usePageReport';
+import React from 'react';
 
 export const ButtonDetailScreen: React.FC = () => {
-    const { colors } = useTheme();
-    const { reportEvent } = usePageReport('ButtonDetailScreen');
+    const {colors} = useTheme();
+    const {reportEvent} = usePageReport('ButtonDetailScreen');
     return (
-        <View style={[styles.detailContainer, { backgroundColor: colors.background }]}>
-            <Text style={{ color: colors.text, fontSize: 20, fontWeight: 'bold', marginBottom: 20 }}>按钮组件详情</Text>
-            <TouchableOpacity onPress={()=>{
-                reportEvent('button_click', { button_name: '计数按钮', counter: "1" });
+        <View style={[styles.detailContainer, {backgroundColor: colors.background}]}>
+            <Text style={{color: colors.text, fontSize: 20, fontWeight: 'bold', marginBottom: 20}}>按钮组件详情</Text>
+            <TouchableOpacity onPress={() => {
+                reportEvent('button_click', {button_name: '计数按钮', counter: '1'});
             }} style={styles.button}>
                 <Text style={styles.buttonText}>基础按钮</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, { backgroundColor: '#007AFF' }]}>
-                <Text style={[styles.buttonText, { color: 'white' }]}>主要按钮</Text>
+            <TouchableOpacity style={[styles.button, {backgroundColor: '#007AFF'}]}>
+                <Text style={[styles.buttonText, {color: 'white'}]}>主要按钮</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, { backgroundColor: '#FF3B30' }]}>
-                <Text style={[styles.buttonText, { color: 'white' }]}>危险按钮</Text>
+            <TouchableOpacity style={[styles.button, {backgroundColor: '#FF3B30'}]}>
+                <Text style={[styles.buttonText, {color: 'white'}]}>危险按钮</Text>
             </TouchableOpacity>
         </View>
     );
