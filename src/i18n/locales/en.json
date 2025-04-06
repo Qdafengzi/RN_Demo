@@ -1,0 +1,11 @@
+{
+  "common": {
+    "hello": "Hello",
+    "welcome": "Welcome to our app",
+    "buttons": {
+      "login": "Login",
+      "signup": "Sign Up",
+      "logout": "Logout"
+    }
+  }
+}
