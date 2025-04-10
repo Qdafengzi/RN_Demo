@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ComponentListScreen, ComponentStackParamList } from './ComponentListScreen';
 import { usePageReport } from '../../hooks/usePageReport';
 import {LoadingScreen} from '../../component/LoadingScreen.tsx';
+// import {useTheme} from '../../theme/ThemeContext.tsx';
 
 // 使用懒加载替代直接导入
 const ButtonDetailScreen = lazy(() => import('./details/ButtonDetailScreen').then(module => ({ default: module.ButtonDetailScreen })));
@@ -68,6 +69,7 @@ const LazyScrollViewDetailScreen = () => (
 // 主组件页面，包含嵌套导航
 export const HomeScreen: React.FC = () => {
   usePageReport('HomeScreen');
+    // const { colors } = useTheme();
 
   return (
       <Stack.Navigator
@@ -75,7 +77,10 @@ export const HomeScreen: React.FC = () => {
           screenOptions={({route}) => ({
               headerShown: route.name !== 'ComponentList',
               headerTitleAlign: 'center',
+              // headerStyle: {backgroundColor: colors.background, borderWidth: 2, borderColor: colors.border},
+              // headerTitleStyle:{color:colors.text},
           })}
+
       >
         <Stack.Screen
             name="ComponentList"
