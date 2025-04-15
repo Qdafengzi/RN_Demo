@@ -1,7 +1,9 @@
-import {StyleSheet, Text, View} from 'react-native';
-import {useTheme} from '../../../theme/ThemeContext';
-import React, {useEffect, useState} from 'react';
-import {FlashList} from '@shopify/flash-list';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { useTheme } from '../../../theme/ThemeContext';
+import React, { useEffect, useState } from 'react';
+import { FlashList } from '@shopify/flash-list';
+import { Animated } from 'react-native';
+import { CollapsibleHeaderScrollView } from 'react-native-collapsible-header-views';
 
 interface ListItemProps {
     id: string;
@@ -17,7 +19,7 @@ const ListItem: React.FC<ListItemProps> = (item) => (
 );
 
 export const ListDetailScreen: React.FC = () => {
-    const {colors} = useTheme();
+    const { colors } = useTheme();
     const [listData, setListData] = useState<ListItemProps[]>([]);
 
     useEffect(() => {
@@ -32,15 +34,32 @@ export const ListDetailScreen: React.FC = () => {
         setListData(list);
     }, []);
 
+    const Header = () => {
+        return (
+            <View style={{ height: 100, width: '100%', backgroundColor: 'red' }}>
+                <Text style={{ color: '#fff' }}>Header</Text>
+            </View>
+        )
+    };
+
     return (
-        <View style={[styles.detailContainer, {backgroundColor: colors.background}]}>
-            <FlashList
-                style={styles.listBox}
-                data={listData}
-                keyExtractor={(item) => item.id}
-                renderItem={({item}) => <ListItem {...item} />}
-                estimatedItemSize={200}
-            />
+        <View style={[styles.detailContainer, { backgroundColor: colors.background }]}>
+
+            <CollapsibleHeaderScrollView
+                CollapsibleHeaderComponent={<Header/>}
+                headerHeight={100}
+                statusBarHeight={Platform.OS === 'ios' ? 20 : 0}
+            >
+                <FlashList
+                    style={styles.listBox}
+                    data={listData}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => <ListItem {...item} />}
+                    estimatedItemSize={200}
+                />
+            </CollapsibleHeaderScrollView>
+
+
         </View>
     );
 };
@@ -50,7 +69,7 @@ const styles = StyleSheet.create({
     detailContainer: {
         flex: 1,
     },
-    listBox:{
+    listBox: {
         flex: 1,
         width: '100%',
     },

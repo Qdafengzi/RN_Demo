@@ -20,8 +20,10 @@
     "react": "18.3.1",
     "react-i18next": "^15.4.1",
     "react-native": "0.76.8",
+    "react-native-collapsible-header-views": "^1.1.2",
     "react-native-gesture-handler": "^2.25.0",
     "react-native-localize": "^3.4.1",
+    "react-native-reanimated": "^3.17.3",
     "react-native-safe-area-context": "^5.3.0",
     "react-native-screens": "^4.10.0"
   },
