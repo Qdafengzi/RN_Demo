@@ -7,7 +7,9 @@ const componentList = [
     { id: '1', title: '按钮组件', route: 'ButtonDetail' },
     { id: '2', title: '文本组件', route: 'TextDetail' },
     { id: '3', title: '输入框组件', route: 'InputDetail' },
-    { id: '4', title: '列表组件', route: 'ListDetail' },
+    { id: '4', title: '列表组件1', route: 'ListDetail1' },
+    { id: '9', title: '列表组件2', route: 'ListDetail2' },
+    { id: '10', title: '列表组件3', route: 'ListDetail3' },
     { id: '5', title: '图片组件', route: 'ImageDetail' },
     { id: '6', title: '导航组件', route: 'NavigationDetail' },
     { id: '7', title: '弹窗组件', route: 'ModalDetail' },
@@ -20,7 +22,9 @@ export type ComponentStackParamList = {
     ButtonDetail: undefined;
     TextDetail: undefined;
     InputDetail: undefined;
-    ListDetail: undefined;
+    ListDetail1: undefined;
+    ListDetail2: undefined;
+    ListDetail3: undefined;
     ImageDetail: undefined;
     NavigationDetail: undefined;
     ModalDetail: undefined;

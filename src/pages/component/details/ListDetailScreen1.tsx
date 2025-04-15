@@ -18,7 +18,7 @@ const ListItem: React.FC<ListItemProps> = (item) => (
     </View>
 );
 
-export const ListDetailScreen: React.FC = () => {
+export const ListDetailScreen1: React.FC = () => {
     const { colors } = useTheme();
     const [listData, setListData] = useState<ListItemProps[]>([]);
 
