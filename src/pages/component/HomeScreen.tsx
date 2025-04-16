@@ -12,6 +12,7 @@ const InputDetailScreen = lazy(() => import('./details/InputDetailScreen').then(
 const ListDetailScreen1 = lazy(() => import('./details/ListDetailScreen1').then(module => ({ default: module.ListDetailScreen1 })));
 const ListDetailScreen2 = lazy(() => import('./details/ListDetailScreen2').then(module => ({ default: module.ListDetailScreen2 })));
 const ListDetailScreen3 = lazy(() => import('./details/ListDetailScreen3').then(module => ({ default: module.ListDetailScreen3 })));
+const ListDetailScreen4 = lazy(() => import('./details/ListDetailScreen4').then(module => ({ default: module.ListDetailScreen4 })));
 const ImageDetailScreen = lazy(() => import('./details/ImageDetailScreen').then(module => ({ default: module.ImageDetailScreen })));
 const NavigationDetailScreen = lazy(() => import('./details/NavigationDetailScreen').then(module => ({ default: module.NavigationDetailScreen })));
 const ModalDetailScreen = lazy(() => import('./details/ModalDetailScreen').then(module => ({ default: module.ModalDetailScreen })));
@@ -54,6 +55,11 @@ const LazyListDetailScreen3 = () => (
     <Suspense fallback={<LoadingScreen />}>
         <ListDetailScreen3 />
     </Suspense>
+);
+const LazyListDetailScreen4 = () => (
+  <Suspense fallback={<LoadingScreen />}>
+      <ListDetailScreen4 />
+  </Suspense>
 );
 
 const LazyImageDetailScreen = () => (
@@ -104,9 +110,10 @@ export const HomeScreen: React.FC = () => {
         <Stack.Screen name="ButtonDetail" component={LazyButtonDetailScreen} options={{ title: '按钮组件' }} />
         <Stack.Screen name="TextDetail" component={LazyTextDetailScreen} options={{ title: '文本组件' }} />
         <Stack.Screen name="InputDetail" component={LazyInputDetailScreen} options={{ title: '输入框组件' }} />
-        <Stack.Screen name="ListDetail1" component={LazyListDetailScreen} options={{ title: '列表组件' }} />
-        <Stack.Screen name="ListDetail2" component={LazyListDetailScreen2} options={{ title: '列表组件' }} />
-        <Stack.Screen name="ListDetail3" component={LazyListDetailScreen3} options={{ title: '列表组件' }} />
+        <Stack.Screen name="ListDetail1" component={LazyListDetailScreen} options={{ title: '列表组件1' }} />
+        <Stack.Screen name="ListDetail2" component={LazyListDetailScreen2} options={{ title: '列表组件2' }} />
+        <Stack.Screen name="ListDetail3" component={LazyListDetailScreen3} options={{ title: '列表组件3' }} />
+        <Stack.Screen name="ListDetail4" component={LazyListDetailScreen4} options={{ title: '列表组件4' }} />
         <Stack.Screen name="ImageDetail" component={LazyImageDetailScreen} options={{ title: '图片组件' }} />
         <Stack.Screen name="NavigationDetail" component={LazyNavigationDetailScreen} options={{ title: '导航组件' }} />
         <Stack.Screen name="ModalDetail" component={LazyModalDetailScreen} options={{ title: '弹窗组件' }} />
