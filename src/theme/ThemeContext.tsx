@@ -1,6 +1,6 @@
-import React, {createContext, useContext, useState, useEffect} from 'react';
-import {ImageStyle, StyleSheet, TextStyle, useColorScheme, ViewStyle} from 'react-native';
-import {ThemeColors, LightTheme, DarkTheme} from './colors';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { ImageStyle, StatusBar, StyleSheet, TextStyle, useColorScheme, ViewStyle } from 'react-native';
+import { ThemeColors, LightTheme, DarkTheme } from './colors';
 
 interface ThemeContextType {
     colors: ThemeColors;
@@ -10,7 +10,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const colorScheme = useColorScheme();
     const [isDark, setIsDark] = useState(colorScheme === 'dark');
 
@@ -25,7 +25,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({children
     };
 
     return (
-        <ThemeContext.Provider value={{colors, isDark, toggleTheme}}>
+        <ThemeContext.Provider value={{ colors, isDark, toggleTheme }}>
+             <StatusBar
+                barStyle={'dark-content'}
+                backgroundColor={colors.background}
+            />
             {children}
         </ThemeContext.Provider>
     );
