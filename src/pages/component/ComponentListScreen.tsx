@@ -11,6 +11,7 @@ const componentList = [
     { id: '9', title: '列表组件2', route: 'ListDetail2' },
     { id: '10', title: '列表组件3', route: 'ListDetail3' },
     { id: '11', title: '列表组件4', route: 'ListDetail4' },
+    { id: '12', title: '列表组件5', route: 'ListDetail5' },
     { id: '5', title: '图片组件', route: 'ImageDetail' },
     { id: '6', title: '导航组件', route: 'NavigationDetail' },
     { id: '7', title: '弹窗组件', route: 'ModalDetail' },
@@ -27,6 +28,7 @@ export type ComponentStackParamList = {
     ListDetail2: undefined;
     ListDetail3: undefined;
     ListDetail4: undefined;
+    ListDetail5: undefined;
     ImageDetail: undefined;
     NavigationDetail: undefined;
     ModalDetail: undefined;
