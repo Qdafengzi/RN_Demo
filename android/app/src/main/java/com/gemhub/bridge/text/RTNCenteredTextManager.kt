@@ -1,5 +1,6 @@
-package com.gemhub.bridge
+package com.gemhub.bridge.text
 
+import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
@@ -7,33 +8,26 @@ import com.facebook.react.uimanager.ViewManagerDelegate
 import com.facebook.react.uimanager.annotations.ReactProp
 import com.facebook.react.viewmanagers.CenteredTextManagerDelegate
 import com.facebook.react.viewmanagers.CenteredTextManagerInterface
-import com.gemhub.bridge.RTNCenteredTextManager
-import com.gemhub.bridge.text.RTNCenteredTextView
 
 @ReactModule(name = RTNCenteredTextManager.NAME)
-class RTNCenteredTextManager : SimpleViewManager<RTNCenteredTextView>(),
-    CenteredTextManagerInterface<RTNCenteredTextView?> {
-    private val mDelegate: ViewManagerDelegate<RTNCenteredTextView> =
-        CenteredTextManagerDelegate(this)
+class RTNCenteredTextManager(context: ReactApplicationContext) : SimpleViewManager<RTNCenteredTextView>(), CenteredTextManagerInterface<RTNCenteredTextView> {
 
-    override fun getName(): String {
-        return NAME
-    }
+    private val mDelegate: CenteredTextManagerDelegate<RTNCenteredTextView, RTNCenteredTextManager> = CenteredTextManagerDelegate(this)
 
-    public override fun getDelegate(): ViewManagerDelegate<RTNCenteredTextView>? {
-        return mDelegate
-    }
+    public override fun getDelegate(): ViewManagerDelegate<RTNCenteredTextView> = mDelegate
 
-    public override fun createViewInstance(context: ThemedReactContext): RTNCenteredTextView {
-        return RTNCenteredTextView(context)
-    }
+    override fun getName() = NAME
 
-    @ReactProp(name = "text")
-    override fun setText(view: RTNCenteredTextView, text: String?) {
-        view.text = text
-    }
+
+    public override fun createViewInstance(context: ThemedReactContext) = RTNCenteredTextView(context)
 
     companion object {
         const val NAME: String = "CenteredText"
+    }
+
+
+    @ReactProp(name = "text")
+    override fun setText(view: RTNCenteredTextView?, value: String?) {
+        view?.text = value
     }
 }
