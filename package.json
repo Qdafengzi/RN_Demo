@@ -31,7 +31,7 @@
     "react-native-screens": "^4.10.0"
   },
   "codegenConfig": {
-    "name": "CenteredTextSpec",
+    "name": "CustomWebViewSpec",
     "type": "components",
     "jsSrcsDir": "specs",
     "android": {

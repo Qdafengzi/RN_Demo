@@ -1,33 +1,66 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { useTheme } from '../../theme/ThemeContext';
-import React from 'react';
-import WebViewNativeComponent from '../../../specs/WebViewNativeComponent';
-import CenteredTextNativeComponent from '../../../specs/CenteredTextNativeComponent';
+import React, { lazy, Suspense } from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { usePageReport } from '../../hooks/usePageReport';
+import { LoadingScreen } from '../../component/LoadingScreen.tsx';
+import { NativeListScreen, NativeStackParamList } from './NativeListScreen.tsx';
 
-export function NativeScreen(): React.JSX.Element {
-    const { colors } = useTheme();
+// 使用懒加载替代直接导入
+const NativeTextScreen = lazy(() => import('./pages/NativeTextScreen.tsx').then(module => ({ default: module.NativeTextScreen })));
+const NativeWebViewScreen = lazy(() => import('./pages/NativeWebviewScreen.tsx').then(module => ({ default: module.NativeWebviewScreen })));
+const NativeSliderScreen = lazy(() => import('./pages/NativeSliderScreen.tsx').then(module => ({ default: module.NativeSliderScreen })));
+const NativeComposeSliderScreen = lazy(() => import('./pages/NativeComposeSliderScreen.tsx').then(module => ({ default: module.NativeComposeSliderScreen })));
+
+const Stack = createStackNavigator<NativeStackParamList>();
+
+// 包装懒加载组件
+const LazyNativeTextScreen = () => (
+    <Suspense fallback={<LoadingScreen />}>
+        <NativeTextScreen />
+    </Suspense>
+);
+
+const LazyNativeWebViewScreen = () => (
+    <Suspense fallback={<LoadingScreen />}>
+        <NativeWebViewScreen />
+    </Suspense>
+);
+
+const LazyNativeSliderScreen = () => (
+    <Suspense fallback={<LoadingScreen />}>
+        <NativeSliderScreen />
+    </Suspense>
+);
+
+const LazyNativeComposeSliderScreen = () => (
+    <Suspense fallback={<LoadingScreen />}>
+        <NativeComposeSliderScreen />
+    </Suspense>
+);
+
+
+// 主组件页面，包含嵌套导航
+export const NativeScreen: React.FC = () => {
+    usePageReport('NativeScreen');
+
     return (
-        <View style={styles.screen}>
-            <Text style={{ color: colors.primary }}>
-                Native content
-            </Text>
-            <WebViewNativeComponent 
-                style={{width:'50%',height:400}}
-                sourceURL='www.baidu.com'
-                onScriptLoaded={() => {
-                    console.log('script loaded');
-                }}
-            />
-            
-            <CenteredTextNativeComponent text ="原生控件"  style={{width:200,height:50}}/>
-        </View>
-    );
-}
+        <Stack.Navigator
+            initialRouteName="NativeList"
+            screenOptions={({ route }) => ({
+                headerShown: route.name !== 'NativeList',
+                headerTitleAlign: 'center',
+            })}
 
-const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-});
+        >
+            <Stack.Screen
+                name="NativeList"
+                component={NativeListScreen}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen name="TextScreen" component={LazyNativeTextScreen} options={{ title: 'NativeText' }} />
+            <Stack.Screen name="WebViewScreen" component={LazyNativeWebViewScreen} options={{ title: 'NativeWeb' }} />
+            <Stack.Screen name="SliderScreen" component={LazyNativeSliderScreen} options={{ title: 'NativeSilder' }} />
+            <Stack.Screen name="SliderComposeScreen" component={LazyNativeComposeSliderScreen} options={{ title: 'NativeComposeSilder' }} />
+        </Stack.Navigator>
+    );
+};
+

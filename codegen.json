@@ -1,0 +1,24 @@
+[
+    {
+        "name": "WebSpec",
+        "type": "components",
+        "jsSrcsDir": "specs",
+        "android": {
+            "javaPackageName": "com.gemhub"
+        },
+        "platforms": [
+            "android"
+        ]
+    },
+    {
+        "name": "CenteredTextSpec",
+        "type": "components",
+        "jsSrcsDir": "specs",
+        "android": {
+            "javaPackageName": "com.gemhub"
+        },
+        "platforms": [
+            "android"
+        ]
+    }
+]

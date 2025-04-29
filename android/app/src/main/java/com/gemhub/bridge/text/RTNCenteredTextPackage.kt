@@ -14,7 +14,6 @@ class RTNCenteredTextPackage : BaseReactPackage() {
     }
 
     override fun getReactModuleInfoProvider() = ReactModuleInfoProvider {
-
         mapOf(
             RTNCenteredTextManager.NAME to ReactModuleInfo(
                 name = RTNCenteredTextManager.NAME,
