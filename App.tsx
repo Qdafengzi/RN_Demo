@@ -58,7 +58,12 @@ function MainNavigator() {
                 onStateChange={(_) => {
                     const currentRouteName = navigationRef.current?.getCurrentRoute()?.name ?? '';
                     console.log(`当前导航的:${currentRouteName}`);
-                    if (currentRouteName === 'ComponentList' || currentRouteName === '原生' || currentRouteName === '其他') {
+                    if (currentRouteName === 'ComponentList' 
+                        || currentRouteName === '原生' 
+                        || currentRouteName === 'NativeList' 
+                        || currentRouteName === '其他'
+                        || currentRouteName === 'OtherList'
+                    ) {
                         setTabBarHide(false);
                     } else {
                         setTabBarHide(true);
