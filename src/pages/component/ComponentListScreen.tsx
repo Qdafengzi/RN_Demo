@@ -16,6 +16,8 @@ const componentList = [
     { id: '6', title: '导航组件', route: 'NavigationDetail' },
     { id: '7', title: '弹窗组件', route: 'ModalDetail' },
     { id: '8', title: '滚动视图', route: 'ScrollViewDetail' },
+    { id: '13', title: 'BottomSheet', route: 'BottomSheetScreen' },
+    { id: '14', title: 'BottomSheet1', route: 'BottomSheetScreen1' },
 ];
 
 // 定义导航参数类型
@@ -33,6 +35,8 @@ export type ComponentStackParamList = {
     NavigationDetail: undefined;
     ModalDetail: undefined;
     ScrollViewDetail: undefined;
+    BottomSheetScreen: undefined;
+    BottomSheetScreen1: undefined;
 };
 
 

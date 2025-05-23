@@ -18,6 +18,8 @@ const ImageDetailScreen = lazy(() => import('./details/ImageDetailScreen').then(
 const NavigationDetailScreen = lazy(() => import('./details/NavigationDetailScreen').then(module => ({ default: module.NavigationDetailScreen })));
 const ModalDetailScreen = lazy(() => import('./details/ModalDetailScreen').then(module => ({ default: module.ModalDetailScreen })));
 const ScrollViewDetailScreen = lazy(() => import('./details/ScrollViewDetailScreen').then(module => ({ default: module.ScrollViewDetailScreen })));
+const BottomSheetScreen = lazy(() => import('./details/BottomSheetScreen').then(module => ({ default: module.BottomSheetScreen })));
+const BottomSheetScreen1 = lazy(() => import('./details/BottomSheetScreen1').then(module => ({ default: module.BottomSheetScreen1 })));
 
 const Stack = createStackNavigator<ComponentStackParamList>();
 
@@ -93,6 +95,18 @@ const LazyScrollViewDetailScreen = () => (
     </Suspense>
 );
 
+const LazyBottomSheetScreen = () => (
+  <Suspense fallback={<BottomSheetScreen />}>
+    <BottomSheetScreen />
+  </Suspense>
+);
+
+const LazyBottomSheetScreen1 = () => (
+  <Suspense fallback={<BottomSheetScreen1 />}>
+    <BottomSheetScreen1 />
+  </Suspense>
+);
+
 // 主组件页面，包含嵌套导航
 export const HomeScreen: React.FC = () => {
   usePageReport('HomeScreen');
@@ -126,6 +140,8 @@ export const HomeScreen: React.FC = () => {
         <Stack.Screen name="NavigationDetail" component={LazyNavigationDetailScreen} options={{ title: '导航组件' }} />
         <Stack.Screen name="ModalDetail" component={LazyModalDetailScreen} options={{ title: '弹窗组件' }} />
         <Stack.Screen name="ScrollViewDetail" component={LazyScrollViewDetailScreen} options={{ title: '滚动视图' }} />
+        <Stack.Screen name="BottomSheetScreen" component={LazyBottomSheetScreen} options={{ title: 'BottomSheetScreen' }} />
+        <Stack.Screen name="BottomSheetScreen1" component={LazyBottomSheetScreen1} options={{ title: 'BottomSheetScreen1' }} />
       </Stack.Navigator>
   );
 };
