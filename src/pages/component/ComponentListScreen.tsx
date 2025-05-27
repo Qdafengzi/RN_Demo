@@ -18,6 +18,7 @@ const componentList = [
     { id: '8', title: '滚动视图', route: 'ScrollViewDetail' },
     { id: '13', title: 'BottomSheet', route: 'BottomSheetScreen' },
     { id: '14', title: 'BottomSheet1', route: 'BottomSheetScreen1' },
+    { id: '15', title: 'PullToRefresh', route: 'PullToRefresh' },
 ];
 
 // 定义导航参数类型
@@ -37,6 +38,7 @@ export type ComponentStackParamList = {
     ScrollViewDetail: undefined;
     BottomSheetScreen: undefined;
     BottomSheetScreen1: undefined;
+    PullToRefresh: undefined;
 };
 
 

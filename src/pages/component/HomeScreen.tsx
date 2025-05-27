@@ -20,6 +20,7 @@ const ModalDetailScreen = lazy(() => import('./details/ModalDetailScreen').then(
 const ScrollViewDetailScreen = lazy(() => import('./details/ScrollViewDetailScreen').then(module => ({ default: module.ScrollViewDetailScreen })));
 const BottomSheetScreen = lazy(() => import('./details/BottomSheetScreen').then(module => ({ default: module.BottomSheetScreen })));
 const BottomSheetScreen1 = lazy(() => import('./details/BottomSheetScreen1').then(module => ({ default: module.BottomSheetScreen1 })));
+const PullToRefresh = lazy(() => import('./details/PullToRefresh').then(module => ({ default: module.PullToRefresh })));
 
 const Stack = createStackNavigator<ComponentStackParamList>();
 
@@ -107,6 +108,12 @@ const LazyBottomSheetScreen1 = () => (
   </Suspense>
 );
 
+const LazyPullToRefresh = () => (
+  <Suspense fallback={<PullToRefresh />}>
+    <PullToRefresh />
+  </Suspense>
+);
+
 // 主组件页面，包含嵌套导航
 export const HomeScreen: React.FC = () => {
   usePageReport('HomeScreen');
@@ -142,6 +149,7 @@ export const HomeScreen: React.FC = () => {
         <Stack.Screen name="ScrollViewDetail" component={LazyScrollViewDetailScreen} options={{ title: '滚动视图' }} />
         <Stack.Screen name="BottomSheetScreen" component={LazyBottomSheetScreen} options={{ title: 'BottomSheetScreen' }} />
         <Stack.Screen name="BottomSheetScreen1" component={LazyBottomSheetScreen1} options={{ title: 'BottomSheetScreen1' }} />
+        <Stack.Screen name="PullToRefresh" component={LazyPullToRefresh} options={{ title: 'LazyPullToRefresh' }} />
       </Stack.Navigator>
   );
 };
