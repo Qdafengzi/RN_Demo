@@ -6,11 +6,13 @@ import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost
 import com.facebook.react.ReactNativeHost
 import com.facebook.react.ReactPackage
+import com.facebook.react.TurboReactPackage
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
 import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
+import com.rn_demo.bridge.CommonNativePackage
 import com.rn_demo.bridge.box.ReactViewGroupBoxPackage
 import com.rn_demo.bridge.compose.slider.RTNSliderComposePackage
 import com.rn_demo.bridge.pulltorefresh.ReactPullToRefreshPackage
@@ -31,6 +33,7 @@ class MainApplication : Application(), ReactApplication {
                add(ReactWebViewPackage())
                add(ReactViewGroupBoxPackage())
                add(ReactPullToRefreshPackage())
+               add(CommonNativePackage())
             }
 
         override fun getJSMainModuleName(): String = "index"
