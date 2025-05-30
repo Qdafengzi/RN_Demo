@@ -3,6 +3,7 @@ import { useTheme } from "@react-navigation/native";
 import { usePageReport } from "../../../hooks/usePageReport";
 import { useState } from "react";
 import { Text } from "react-native-gesture-handler";
+import RTNSliderNativeComponent from "../../../../specs/RTNComposeSliderNativeComponent.ts";
 
 export const NativeComposeSliderScreen = () => {
     const { colors } = useTheme();
@@ -12,19 +13,18 @@ export const NativeComposeSliderScreen = () => {
     return (
         <View style={[styles.detailContainer, { backgroundColor: colors.background }]}>
             <Text style={{ marginTop: 20, color: colors.text }}>{progress}</Text>
-            <Text style={{ marginTop: 20, color: colors.text }}>暂时不支持Compose的形式</Text>
 
-
-            {/* <RTNSliderNativeComponent
-                style={{ width: '100%', height: 20, marginTop: 10 }}
+            {<RTNSliderNativeComponent
+                style={{ width: '100%',height:100, marginTop: 10 ,marginBottom:10}}
                 max={100}
                 min={0}
                 value={progress}
+                text={"Zoom"}
                 onProgress={(e) => {
                     setProgress(e.nativeEvent.progress);
                     console.log('value changed', e.nativeEvent.progress);
                 }}
-            /> */}
+            />}
 
             <Button
                 title="change"

@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -108,9 +109,13 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
-//    buildFeatures {
-//        compose true
-//    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "1.5.15"
+    }
+
 }
 
 dependencies {
@@ -124,7 +129,7 @@ dependencies {
     }
 
 
-    def composeBom = platform('androidx.compose:compose-bom:2025.02.00')
+    def composeBom = platform('androidx.compose:compose-bom:2025.05.01')
     implementation composeBom
     androidTestImplementation composeBom
 

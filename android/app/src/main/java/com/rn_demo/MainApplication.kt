@@ -12,6 +12,7 @@ import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
 import com.rn_demo.bridge.box.ReactViewGroupBoxPackage
+import com.rn_demo.bridge.compose.slider.RTNSliderComposePackage
 import com.rn_demo.bridge.pulltorefresh.ReactPullToRefreshPackage
 import com.rn_demo.bridge.slider.RTNSliderPackage
 import com.rn_demo.bridge.text.RTNCenteredTextPackage
@@ -24,7 +25,7 @@ class MainApplication : Application(), ReactApplication {
         override fun getPackages(): List<ReactPackage> =
             PackageList(this).packages.apply {
               // Packages that cannot be autolinked yet can be added manually here, for example:
-               //add(RTNSliderComposePackage())
+               add(RTNSliderComposePackage())
                add(RTNCenteredTextPackage())
                add(RTNSliderPackage())
                add(ReactWebViewPackage())

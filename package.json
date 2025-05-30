@@ -34,7 +34,7 @@
     "react-native-screens": "^4.10.0"
   },
   "codegenConfig": {
-    "name": "PullToRefreshSpec",
+    "name": "RTNSliderComposeSpec",
     "type": "components",
     "jsSrcsDir": "specs",
     "android": {
