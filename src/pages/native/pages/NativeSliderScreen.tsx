@@ -1,13 +1,14 @@
-import { Button, StyleSheet, View } from "react-native"
-import { useTheme } from "@react-navigation/native";
-import { usePageReport } from "../../../hooks/usePageReport";
-import RTNSliderNativeComponent from "../../../../specs/RTNSliderNativeComponent";
-import { useState } from "react";
-import { Text } from "react-native-gesture-handler";
+import { Button, StyleSheet, View } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { usePageReport } from '../../../hooks/usePageReport';
+import RTNSliderNativeComponent from '../../../../specs/RTNSliderNativeComponent';
+import { useState } from 'react';
+import React from 'react';
+import { Text } from 'react-native-gesture-handler';
 
 export const NativeSliderScreen = () => {
     const { colors } = useTheme();
-    const { reportEvent } = usePageReport('ButtonDetailScreen');
+    usePageReport('ButtonDetailScreen');
     const [progress, setProgress] = useState(0);
 
     return (
@@ -34,9 +35,8 @@ export const NativeSliderScreen = () => {
             />
 
         </View>
-    )
-
-}
+    );
+};
 
 const styles = StyleSheet.create({
     detailContainer: {
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
         padding: 16,
         alignItems: 'center',
     },
-})
+});
