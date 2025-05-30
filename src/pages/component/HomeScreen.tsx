@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ComponentListScreen, ComponentStackParamList } from './ComponentListScreen';
 import { usePageReport } from '../../hooks/usePageReport';
 import {LoadingScreen} from '../../component/LoadingScreen.tsx';
+import {useTheme} from "../../theme/ThemeContext.tsx";
 // import {useTheme} from '../../theme/ThemeContext.tsx';
 
 // 使用懒加载替代直接导入

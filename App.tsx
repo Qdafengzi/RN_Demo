@@ -3,9 +3,10 @@ import { NavigationContainer, NavigationContainerRef } from '@react-navigation/n
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { ThemeProvider, useTheme } from './src/theme/ThemeContext';
-import { Image, LogBox, StatusBar, View } from 'react-native';
+import { Image, LogBox, StatusBar } from 'react-native';
 import { LoadingScreen } from './src/component/LoadingScreen';
 import { enableScreens } from 'react-native-screens';
+import { SafeAreaView} from 'react-native-safe-area-context';
 
 // 启用屏幕优化
 enableScreens();
@@ -47,10 +48,11 @@ function MainNavigator() {
     const [tabBarHide, setTabBarHide] = useState(false);
 
     return (
-        <View style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 }} >
             <StatusBar
                 barStyle={'dark-content'}
                 backgroundColor={colors.background}
+
             />
             <NavigationContainer
                 fallback={null}
@@ -58,9 +60,9 @@ function MainNavigator() {
                 onStateChange={(_) => {
                     const currentRouteName = navigationRef.current?.getCurrentRoute()?.name ?? '';
                     console.log(`当前导航的:${currentRouteName}`);
-                    if (currentRouteName === 'ComponentList' 
-                        || currentRouteName === '原生' 
-                        || currentRouteName === 'NativeList' 
+                    if (currentRouteName === 'ComponentList'
+                        || currentRouteName === '原生'
+                        || currentRouteName === 'NativeList'
                         || currentRouteName === '其他'
                         || currentRouteName === 'OtherList'
                     ) {
@@ -129,7 +131,7 @@ function MainNavigator() {
                     <Tab.Screen name="其他" component={LazyOtherScreen} />
                 </Tab.Navigator>
             </NavigationContainer>
-        </View>
+        </SafeAreaView>
 
     );
 }
