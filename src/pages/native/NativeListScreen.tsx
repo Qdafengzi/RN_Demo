@@ -8,6 +8,7 @@ const nativeList = [
     {id: '2', title: 'WebView', route: 'WebViewScreen'},
     {id: '3', title: 'Slider', route: 'SliderScreen'},
     {id: '4', title: 'SliderCompose', route: 'SliderComposeScreen'},
+    {id: '5', title: 'PullToRefreshPage', route: 'PullToRefreshPage'},
 ];
 
 // 定义导航参数类型
@@ -17,6 +18,7 @@ export type NativeStackParamList = {
     WebViewScreen: undefined;
     SliderScreen: undefined;
     SliderComposeScreen: undefined;
+    PullToRefreshPage: undefined;
 };
 
 

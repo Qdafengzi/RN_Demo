@@ -9,6 +9,7 @@ const NativeTextScreen = lazy(() => import('./pages/NativeTextScreen.tsx').then(
 const NativeWebViewScreen = lazy(() => import('./pages/NativeWebviewScreen.tsx').then(module => ({ default: module.NativeWebviewScreen })));
 const NativeSliderScreen = lazy(() => import('./pages/NativeSliderScreen.tsx').then(module => ({ default: module.NativeSliderScreen })));
 const NativeComposeSliderScreen = lazy(() => import('./pages/NativeComposeSliderScreen.tsx').then(module => ({ default: module.NativeComposeSliderScreen })));
+const PullToRefreshPage = lazy(() => import('./pages/PullToRefreshPage.tsx').then(module => ({ default: module.PullToRefreshPage })));
 
 const Stack = createStackNavigator<NativeStackParamList>();
 
@@ -37,6 +38,12 @@ const LazyNativeComposeSliderScreen = () => (
     </Suspense>
 );
 
+const LazyPullToRefreshPage = () => (
+    <Suspense fallback={<LoadingScreen />}>
+        <PullToRefreshPage />
+    </Suspense>
+);
+
 
 // 主组件页面，包含嵌套导航
 export const NativeScreen: React.FC = () => {
@@ -60,6 +67,7 @@ export const NativeScreen: React.FC = () => {
             <Stack.Screen name="WebViewScreen" component={LazyNativeWebViewScreen} options={{ title: 'NativeWeb' }} />
             <Stack.Screen name="SliderScreen" component={LazyNativeSliderScreen} options={{ title: 'NativeSilder' }} />
             <Stack.Screen name="SliderComposeScreen" component={LazyNativeComposeSliderScreen} options={{ title: 'NativeComposeSilder' }} />
+            <Stack.Screen name="PullToRefreshPage" component={LazyPullToRefreshPage} options={{ title: 'PullToRefreshPage' }} />
         </Stack.Navigator>
     );
 };

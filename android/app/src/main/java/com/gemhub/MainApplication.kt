@@ -11,6 +11,8 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
+import com.gemhub.bridge.box.ReactViewGroupBoxPackage
+import com.gemhub.bridge.pulltorefresh.ReactPullToRefreshPackage
 import com.gemhub.bridge.slider.RTNSliderPackage
 import com.gemhub.bridge.text.RTNCenteredTextPackage
 import com.gemhub.bridge.webview.ReactWebViewPackage
@@ -26,6 +28,8 @@ class MainApplication : Application(), ReactApplication {
                add(RTNCenteredTextPackage())
                add(RTNSliderPackage())
                add(ReactWebViewPackage())
+               add(ReactViewGroupBoxPackage())
+               add(ReactPullToRefreshPackage())
             }
 
         override fun getJSMainModuleName(): String = "index"

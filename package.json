@@ -34,7 +34,7 @@
     "react-native-screens": "^4.10.0"
   },
   "codegenConfig": {
-    "name": "CustomWebViewSpec",
+    "name": "PullToRefreshSpec",
     "type": "components",
     "jsSrcsDir": "specs",
     "android": {
