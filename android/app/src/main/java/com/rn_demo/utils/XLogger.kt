@@ -1,9 +1,9 @@
-package com.gemhub.utils
+package com.rn_demo.utils
 
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import com.gemhub.BuildConfig
+import com.rn_demo.BuildConfig
 
 object XLogger {
     var className: String? = null

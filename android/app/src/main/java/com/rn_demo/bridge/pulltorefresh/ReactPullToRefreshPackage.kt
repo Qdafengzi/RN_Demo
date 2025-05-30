@@ -1,4 +1,4 @@
-package com.gemhub.bridge.webview
+package com.rn_demo.bridge.pulltorefresh
 
 import com.facebook.react.BaseReactPackage
 import com.facebook.react.bridge.NativeModule
@@ -7,22 +7,20 @@ import com.facebook.react.module.model.ReactModuleInfo
 import com.facebook.react.module.model.ReactModuleInfoProvider
 import com.facebook.react.uimanager.ViewManager
 
-class ReactWebViewPackage : BaseReactPackage() {
+class ReactPullToRefreshPackage : BaseReactPackage() {
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-        return listOf(ReactWebViewManager(reactContext))
+        return listOf(ReactPullToRefreshManager())
     }
 
-    override fun getModule(s: String, reactApplicationContext: ReactApplicationContext): NativeModule? {
-        when (s) {
-            ReactWebViewManager.REACT_CLASS -> ReactWebViewManager(reactApplicationContext)
-        }
-        return null
+    override fun getModule(name: String, reactApplicationContext: ReactApplicationContext): NativeModule? {
+        return ReactPullToRefreshManager()
     }
 
     override fun getReactModuleInfoProvider(): ReactModuleInfoProvider = ReactModuleInfoProvider {
-        mapOf(ReactWebViewManager.REACT_CLASS to ReactModuleInfo(
-            name = ReactWebViewManager.REACT_CLASS,
-            className = ReactWebViewManager.REACT_CLASS,
+        mapOf(
+            ReactPullToRefreshManager.NAME to ReactModuleInfo(
+            name = ReactPullToRefreshManager.NAME,
+            className = ReactPullToRefreshManager.NAME,
             canOverrideExistingModule = false,
             needsEagerInit = false,
             isCxxModule = false,

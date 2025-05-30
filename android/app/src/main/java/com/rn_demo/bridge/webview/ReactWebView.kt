@@ -1,17 +1,16 @@
-package com.gemhub.bridge.box
+package com.rn_demo.bridge.webview
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
-import android.view.Gravity
-import android.widget.LinearLayout
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import com.facebook.react.bridge.Arguments
-import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
+import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.events.Event
 
-class ReactViewGroupBox : LinearLayout {
+class ReactWebView: WebView {
     constructor(context: Context) : super(context) {
         configureComponent()
     }
@@ -20,22 +19,17 @@ class ReactViewGroupBox : LinearLayout {
         configureComponent()
     }
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    ) {
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         configureComponent()
     }
 
-
     private fun configureComponent() {
-        orientation = VERTICAL
-        gravity = Gravity.TOP
-        emitOnScriptLoaded(OnScriptLoadedEventResult.success)
-        invalidate()
-        requestLayout()
-        Log.d("初始化", "configureComponent---------------4");
+        this.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        this.webViewClient = object : WebViewClient() {
+            override fun onPageFinished(view: WebView, url: String) {
+                emitOnScriptLoaded(OnScriptLoadedEventResult.success)
+            }
+        }
     }
 
     fun emitOnScriptLoaded(result: OnScriptLoadedEventResult) {
@@ -46,8 +40,8 @@ class ReactViewGroupBox : LinearLayout {
             Arguments.createMap().apply {
                 putString("result", result.name)
             }
-        val event = ViewGroupLoadedEvent(surfaceId, id, payload)
-        Log.d("初始化", "configureComponent---------------3----1");
+        val event = OnScriptLoadedEvent(surfaceId, id, payload)
+
         eventDispatcher?.dispatchEvent(event)
     }
 
@@ -56,12 +50,13 @@ class ReactViewGroupBox : LinearLayout {
         error;
     }
 
-    inner class ViewGroupLoadedEvent(
+    inner class OnScriptLoadedEvent(
         surfaceId: Int,
         viewId: Int,
         private val payload: WritableMap
-    ) : Event<ViewGroupLoadedEvent>(surfaceId, viewId) {
-        override fun getEventName() = "onChildLoaded"
+    ) : Event<OnScriptLoadedEvent>(surfaceId, viewId) {
+        override fun getEventName() = "onScriptLoaded"
+
         override fun getEventData() = payload
     }
 }

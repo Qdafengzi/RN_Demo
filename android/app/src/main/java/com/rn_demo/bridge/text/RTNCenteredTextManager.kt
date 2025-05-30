@@ -1,4 +1,4 @@
-package com.gemhub.bridge.text
+package com.rn_demo.bridge.text
 
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.module.annotations.ReactModule

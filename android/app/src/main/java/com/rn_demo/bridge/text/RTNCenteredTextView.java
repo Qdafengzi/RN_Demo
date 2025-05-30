@@ -1,4 +1,4 @@
-package com.gemhub.bridge.text;
+package com.rn_demo.bridge.text;
 
 import android.content.Context;
 import android.graphics.Color;

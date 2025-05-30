@@ -1,4 +1,4 @@
-package com.gemhub.bridge.compose.slider
+package com.rn_demo.bridge.compose.slider
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

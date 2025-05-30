@@ -75,9 +75,9 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 android {
     ndkVersion rootProject.ext.ndkVersion
     compileSdk rootProject.ext.compileSdkVersion
-    namespace "com.gemhub"
+    namespace "com.rn_demo"
     defaultConfig {
-        applicationId "com.gemhub"
+        applicationId "com.rn_demo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

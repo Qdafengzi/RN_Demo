@@ -17,6 +17,8 @@ export interface NativeProps extends ViewProps {
   isRefreshing?: boolean;
   isLoadMore?: boolean;
   noMoreData?: boolean;
+  enableLoadMore?: boolean;
+  enableRefresh?: boolean;
 }
 
 export default codegenNativeComponent<NativeProps>(

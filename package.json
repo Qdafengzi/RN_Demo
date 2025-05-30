@@ -38,7 +38,7 @@
     "type": "components",
     "jsSrcsDir": "specs",
     "android": {
-      "javaPackageName": "com.gemhub"
+      "javaPackageName": "com.rn_demo"
     },
     "platforms": [
       "android"

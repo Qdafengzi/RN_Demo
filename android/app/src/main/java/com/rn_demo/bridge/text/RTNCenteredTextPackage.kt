@@ -1,4 +1,4 @@
-package com.gemhub.bridge.slider
+package com.rn_demo.bridge.text
 
 import com.facebook.react.BaseReactPackage
 import com.facebook.react.bridge.NativeModule
@@ -7,20 +7,16 @@ import com.facebook.react.module.model.ReactModuleInfo
 import com.facebook.react.module.model.ReactModuleInfoProvider
 import com.facebook.react.uimanager.ViewManager
 
-class RTNSliderPackage : BaseReactPackage() {
-    override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-        return listOf(RTNSliderManager())
-    }
-
+class RTNCenteredTextPackage : BaseReactPackage() {
     override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
-        return RTNSliderManager()
+        return RTNCenteredTextManager(reactContext) // 这个包只包含 ViewManager，没有 NativeModule
     }
 
     override fun getReactModuleInfoProvider() = ReactModuleInfoProvider {
         mapOf(
-            RTNSliderView.NAME to ReactModuleInfo(
-                name = RTNSliderView.NAME,
-                className = RTNSliderView.NAME,
+            RTNCenteredTextManager.NAME to ReactModuleInfo(
+                name = RTNCenteredTextManager.NAME,
+                className = RTNCenteredTextManager.NAME,
                 canOverrideExistingModule = false,
                 needsEagerInit = false,
                 isCxxModule = false,
@@ -29,4 +25,7 @@ class RTNSliderPackage : BaseReactPackage() {
         )
     }
 
+    override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
+        return listOf(RTNCenteredTextManager(reactContext))
+    }
 }

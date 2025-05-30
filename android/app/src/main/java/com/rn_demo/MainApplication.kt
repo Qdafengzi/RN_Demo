@@ -1,4 +1,4 @@
-package com.gemhub
+package com.rn_demo
 
 import android.app.Application
 import com.facebook.react.PackageList
@@ -11,11 +11,11 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
-import com.gemhub.bridge.box.ReactViewGroupBoxPackage
-import com.gemhub.bridge.pulltorefresh.ReactPullToRefreshPackage
-import com.gemhub.bridge.slider.RTNSliderPackage
-import com.gemhub.bridge.text.RTNCenteredTextPackage
-import com.gemhub.bridge.webview.ReactWebViewPackage
+import com.rn_demo.bridge.box.ReactViewGroupBoxPackage
+import com.rn_demo.bridge.pulltorefresh.ReactPullToRefreshPackage
+import com.rn_demo.bridge.slider.RTNSliderPackage
+import com.rn_demo.bridge.text.RTNCenteredTextPackage
+import com.rn_demo.bridge.webview.ReactWebViewPackage
 
 class MainApplication : Application(), ReactApplication {
 

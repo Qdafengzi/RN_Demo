@@ -1,4 +1,4 @@
-package com.gemhub.bridge.slider
+package com.rn_demo.bridge.slider
 
 import android.content.Context
 import android.widget.FrameLayout

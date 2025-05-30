@@ -1,4 +1,4 @@
-package com.gemhub.bridge.webview
+package com.rn_demo.bridge.webview
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.module.annotations.ReactModule;

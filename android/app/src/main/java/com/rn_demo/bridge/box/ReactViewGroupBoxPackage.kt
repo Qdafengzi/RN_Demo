@@ -1,4 +1,4 @@
-package com.gemhub.bridge.box
+package com.rn_demo.bridge.box
 
 import android.util.Log
 import com.facebook.react.BaseReactPackage

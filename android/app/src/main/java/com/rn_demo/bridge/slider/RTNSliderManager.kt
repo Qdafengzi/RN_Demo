@@ -1,4 +1,4 @@
-package com.gemhub.bridge.slider
+package com.rn_demo.bridge.slider
 
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.SimpleViewManager

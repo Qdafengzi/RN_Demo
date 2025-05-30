@@ -1,16 +1,17 @@
-package com.gemhub.bridge.webview
+package com.rn_demo.bridge.box
 
 import android.content.Context
 import android.util.AttributeSet
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.util.Log
+import android.view.Gravity
+import android.widget.LinearLayout
 import com.facebook.react.bridge.Arguments
-import com.facebook.react.bridge.WritableMap
 import com.facebook.react.bridge.ReactContext
+import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.events.Event
 
-class ReactWebView: WebView {
+class ReactViewGroupBox : LinearLayout {
     constructor(context: Context) : super(context) {
         configureComponent()
     }
@@ -19,17 +20,22 @@ class ReactWebView: WebView {
         configureComponent()
     }
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         configureComponent()
     }
 
+
     private fun configureComponent() {
-        this.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-        this.webViewClient = object : WebViewClient() {
-            override fun onPageFinished(view: WebView, url: String) {
-                emitOnScriptLoaded(OnScriptLoadedEventResult.success)
-            }
-        }
+        orientation = VERTICAL
+        gravity = Gravity.TOP
+        emitOnScriptLoaded(OnScriptLoadedEventResult.success)
+        invalidate()
+        requestLayout()
+        Log.d("初始化", "configureComponent---------------4");
     }
 
     fun emitOnScriptLoaded(result: OnScriptLoadedEventResult) {
@@ -40,8 +46,8 @@ class ReactWebView: WebView {
             Arguments.createMap().apply {
                 putString("result", result.name)
             }
-        val event = OnScriptLoadedEvent(surfaceId, id, payload)
-
+        val event = ViewGroupLoadedEvent(surfaceId, id, payload)
+        Log.d("初始化", "configureComponent---------------3----1");
         eventDispatcher?.dispatchEvent(event)
     }
 
@@ -50,13 +56,12 @@ class ReactWebView: WebView {
         error;
     }
 
-    inner class OnScriptLoadedEvent(
+    inner class ViewGroupLoadedEvent(
         surfaceId: Int,
         viewId: Int,
         private val payload: WritableMap
-    ) : Event<OnScriptLoadedEvent>(surfaceId, viewId) {
-        override fun getEventName() = "onScriptLoaded"
-
+    ) : Event<ViewGroupLoadedEvent>(surfaceId, viewId) {
+        override fun getEventName() = "onChildLoaded"
         override fun getEventData() = payload
     }
 }

@@ -1,19 +1,12 @@
-package com.gemhub.bridge.pulltorefresh
+package com.rn_demo.bridge.pulltorefresh
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
-import android.view.Gravity
-import android.widget.LinearLayout
-import android.widget.TextView
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.events.Event
-import com.gemhub.utils.XLogger
-import com.scwang.smart.refresh.footer.ClassicsFooter
-import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
 class ReactPullToRefresh : SmartRefreshLayout {
@@ -24,7 +17,6 @@ class ReactPullToRefresh : SmartRefreshLayout {
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         configureComponent()
     }
-
 
     private fun configureComponent() {
         setOnRefreshListener {

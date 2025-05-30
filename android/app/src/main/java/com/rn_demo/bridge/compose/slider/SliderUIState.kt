@@ -1,4 +1,4 @@
-package com.gemhub.bridge.compose.slider
+package com.rn_demo.bridge.compose.slider
 
 data class SliderUIState(
     val progress: Float,

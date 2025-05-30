@@ -1,4 +1,4 @@
-package com.gemhub.bridge.pulltorefresh
+package com.rn_demo.bridge.pulltorefresh
 
 import android.view.ViewGroup
 import com.facebook.react.module.annotations.ReactModule
@@ -7,7 +7,7 @@ import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.ViewManagerDelegate
 import com.facebook.react.viewmanagers.PullToRefreshManagerDelegate
 import com.facebook.react.viewmanagers.PullToRefreshManagerInterface
-import com.gemhub.utils.XLogger
+import com.rn_demo.utils.XLogger
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 
@@ -23,7 +23,6 @@ class ReactPullToRefreshManager : ViewGroupManager<ReactPullToRefresh>(), PullTo
     override fun getName(): String = NAME
 
     override fun createViewInstance(reactContext: ThemedReactContext): ReactPullToRefresh {
-
         val view = ReactPullToRefresh(reactContext).apply {
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -52,7 +51,14 @@ class ReactPullToRefreshManager : ViewGroupManager<ReactPullToRefresh>(), PullTo
     }
 
     override fun setNoMoreData(view: ReactPullToRefresh?, value: Boolean) {
-        XLogger.d("setNoMoreData----------->")
         view?.setNoMoreData(value)
+    }
+
+    override fun setEnableLoadMore(view: ReactPullToRefresh?, value: Boolean) {
+        view?.setEnableLoadMore(value)
+    }
+
+    override fun setEnableRefresh(view: ReactPullToRefresh?, value: Boolean) {
+        view?.setEnableRefresh(value)
     }
 }
