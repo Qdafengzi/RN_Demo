@@ -5,6 +5,7 @@ import React from 'react';
 /// 定义组件列表数据
 const otherList = [
     {id: '1', title: 'useState', route: 'useState'},
+    {id: '2', title: 'NativeEvent', route: 'NativeEvent'},
 
 ];
 
@@ -12,6 +13,7 @@ const otherList = [
 export type ComponentStackParamList = {
     OtherList: undefined;
     useState: undefined;
+    NativeEvent: undefined;
 };
 
 

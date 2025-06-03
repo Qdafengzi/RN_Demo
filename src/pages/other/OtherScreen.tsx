@@ -6,6 +6,7 @@ import {ComponentStackParamList, OtherListScreen} from './OtherListScreen.tsx';
 
 // 使用懒加载替代直接导入
 const UseStateDetailScreen = lazy(() => import('./UseStateScreen').then(module => ({default: module.UseStateScreen})));
+const NativeEvent = lazy(() => import('./NativeEvent').then(module => ({default: module.NativeEvent})));
 
 const Stack = createStackNavigator<ComponentStackParamList>();
 
@@ -13,6 +14,12 @@ const Stack = createStackNavigator<ComponentStackParamList>();
 const LazyUseStateScreen = () => (
     <Suspense fallback={<LoadingScreen/>}>
         <UseStateDetailScreen/>
+    </Suspense>
+);
+
+const LazyNativeEvent = () => (
+    <Suspense fallback={<LoadingScreen/>}>
+        <NativeEvent/>
     </Suspense>
 );
 
@@ -36,6 +43,7 @@ export const OtherScreen: React.FC = () => {
                 options={{headerShown: false}}
             />
             <Stack.Screen name="useState" component={LazyUseStateScreen} options={{title: 'useState'}}/>
+            <Stack.Screen name="NativeEvent" component={LazyNativeEvent} options={{title: 'NativeEvent'}}/>
         </Stack.Navigator>
     );
 };
