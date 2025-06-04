@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import {Image, StyleSheet, Text, View } from 'react-native';
 import { useTheme } from '../../../theme/ThemeContext';
 import React from 'react';
 
@@ -6,7 +6,9 @@ export const ImageDetailScreen: React.FC = () => {
     const { colors } = useTheme();
     return (
       <View style={[styles.detailContainer, { backgroundColor: colors.background }]}>
-        <Text style={{ color: colors.text, fontSize: 20, fontWeight: 'bold' }}>图片组件详情</Text>
+        <Image source={require('../../../assets/images/ic_home.png')}></Image>
+        <Image source={require('../../../assets/images/ic_home_other.png')}></Image>
+        <Image source={require('../../../assets/images/ic_home_native.png')}></Image>
       </View>
     );
   };

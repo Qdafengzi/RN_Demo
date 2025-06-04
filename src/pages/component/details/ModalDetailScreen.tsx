@@ -1,12 +1,37 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Button, Dimensions, StyleSheet, Text, View} from 'react-native';
 import {useTheme} from '../../../theme/ThemeContext';
-import React from 'react';
+import React, {useState} from 'react';
+import Modal from 'react-native-modal';
+
+
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 export const ModalDetailScreen: React.FC = () => {
     const {colors} = useTheme();
+    const [show, setShow] = useState(false);
+
     return (
         <View style={[styles.detailContainer, {backgroundColor: colors.background}]}>
-            <Text style={{color: colors.text, fontSize: 20, fontWeight: 'bold'}}>弹窗组件详情</Text>
+            <Modal
+                coverScreen={true}
+                statusBarTranslucent={true}
+                isVisible={show}
+                deviceHeight={HEIGHT}
+                deviceWidth={WIDTH}
+                onDismiss={()=>{}}
+                onBackdropPress={()=>{}}
+            >
+                <View style={{flex:0.5,width:"80%",height:"50%",backgroundColor:'#cbcbcc',alignSelf:'center',borderRadius:12}}>
+                    <Text>我是弹窗</Text>
+                    <Button title={'关闭弹窗'} onPress={()=>{
+                        setShow(false);
+                    }}></Button>
+                </View>
+            </Modal>
+            <Button title={'显示弹窗'} onPress={()=>{
+                setShow(true);
+            }}></Button>
         </View>
     );
 };

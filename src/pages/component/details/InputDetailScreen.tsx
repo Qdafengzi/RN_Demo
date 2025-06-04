@@ -8,14 +8,16 @@ export const InputDetailScreen: React.FC = () => {
     return (
         <View style={[styles.detailContainer, {backgroundColor: colors.background}]}>
             <TextInput
+                placeholder={'请输入内容'}
                 value={content}
                 onChangeText={setContent}
                 style={styles.input}/>
 
             <TextInput
+                placeholder={'请输入内容1'}
                 value={content}
                 onChangeText={setContent}
-                editable={false}
+                editable={true}
                 style={styles.input}/>
         </View>
     );
