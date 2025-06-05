@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useTheme} from '../../../theme/ThemeContext';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
@@ -65,6 +65,23 @@ export const TextDetailScreen: React.FC = () => {
         }}>
         下划线文本
       </Text>
+
+
+        <Text
+            style={{
+                color: colors.text,
+                fontSize: 16,
+                fontWeight:'bold',
+                textDecorationLine: 'underline',
+                marginBottom: 10,
+            }}>
+            加粗
+        </Text>
+
+        <Text>
+            {`状态栏的高度 ${StatusBar.currentHeight}`}
+        </Text>
+        <View style={{height:StatusBar.currentHeight,backgroundColor:'red',width:'100%'}}/>
 
       <View
         style={{
