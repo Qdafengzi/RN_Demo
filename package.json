@@ -34,15 +34,22 @@
     "react-native-screens": "^4.10.0"
   },
   "codegenConfig": {
-    "name": "RTNSliderComposeSpec",
+    "name": "AppComponentsSpec",
     "type": "components",
     "jsSrcsDir": "specs",
     "android": {
       "javaPackageName": "com.rn_demo"
     },
-    "platforms": [
-      "android"
-    ]
+    "ios": {
+      "componentProvider": {
+        "CenteredText": "CenteredTextSpec",
+        "PullToRefresh": "PullToRefreshSpec",
+        "RTNSlider": "RTNSliderSpec",
+        "RTNSliderCompose": "RTNSliderComposeSpec",
+        "RTNViewGroup": "RTNViewGroupSpec",
+        "CustomWebView": "CustomWebViewSpec"
+      }
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
