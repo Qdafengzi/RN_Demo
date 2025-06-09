@@ -39,16 +39,6 @@
     "jsSrcsDir": "specs",
     "android": {
       "javaPackageName": "com.rn_demo"
-    },
-    "ios": {
-      "componentProvider": {
-        "CenteredText": "CenteredTextSpec",
-        "PullToRefresh": "PullToRefreshSpec",
-        "RTNSlider": "RTNSliderSpec",
-        "RTNSliderCompose": "RTNSliderComposeSpec",
-        "RTNViewGroup": "RTNViewGroupSpec",
-        "CustomWebView": "CustomWebViewSpec"
-      }
     }
   },
   "devDependencies": {
