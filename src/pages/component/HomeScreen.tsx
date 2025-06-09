@@ -22,6 +22,7 @@ const ScrollViewDetailScreen = lazy(() => import('./details/ScrollViewDetailScre
 const BottomSheetScreen = lazy(() => import('./details/BottomSheetScreen').then(module => ({ default: module.BottomSheetScreen })));
 const BottomSheetScreen1 = lazy(() => import('./details/BottomSheetScreen1').then(module => ({ default: module.BottomSheetScreen1 })));
 const PullToRefresh = lazy(() => import('./details/PullToRefresh').then(module => ({ default: module.PullToRefresh })));
+const SVGScreen = lazy(() => import('./details/SVGScreen').then(module => ({ default: module.SVGScreen })));
 
 const Stack = createStackNavigator<ComponentStackParamList>();
 
@@ -98,21 +99,27 @@ const LazyScrollViewDetailScreen = () => (
 );
 
 const LazyBottomSheetScreen = () => (
-  <Suspense fallback={<BottomSheetScreen />}>
+  <Suspense fallback={<LoadingScreen />}>
     <BottomSheetScreen />
   </Suspense>
 );
 
 const LazyBottomSheetScreen1 = () => (
-  <Suspense fallback={<BottomSheetScreen1 />}>
+  <Suspense fallback={<LoadingScreen />}>
     <BottomSheetScreen1 />
   </Suspense>
 );
 
 const LazyPullToRefresh = () => (
-  <Suspense fallback={<PullToRefresh />}>
+  <Suspense fallback={<LoadingScreen />}>
     <PullToRefresh />
   </Suspense>
+);
+
+const LazySVGScreen= ()=>(
+    <Suspense fallback={<LoadingScreen />}>
+        <SVGScreen />
+    </Suspense>
 );
 
 // 主组件页面，包含嵌套导航
@@ -150,7 +157,8 @@ export const HomeScreen: React.FC = () => {
         <Stack.Screen name="ScrollViewDetail" component={LazyScrollViewDetailScreen} options={{ title: '滚动视图' }} />
         <Stack.Screen name="BottomSheetScreen" component={LazyBottomSheetScreen} options={{ title: 'BottomSheetScreen' }} />
         <Stack.Screen name="BottomSheetScreen1" component={LazyBottomSheetScreen1} options={{ title: 'BottomSheetScreen1' }} />
-        <Stack.Screen name="PullToRefresh" component={LazyPullToRefresh} options={{ title: 'LazyPullToRefresh' }} />
+        <Stack.Screen name="PullToRefresh" component={LazyPullToRefresh} options={{ title: 'PullToRefresh' }} />
+        <Stack.Screen name="SVGScreen" component={LazySVGScreen} options={{ title: 'SVGScreen' }} />
       </Stack.Navigator>
   );
 };

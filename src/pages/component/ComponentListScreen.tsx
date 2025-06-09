@@ -19,6 +19,7 @@ const componentList = [
     { id: '13', title: 'BottomSheet', route: 'BottomSheetScreen' },
     { id: '14', title: 'BottomSheet1', route: 'BottomSheetScreen1' },
     { id: '15', title: 'PullToRefresh', route: 'PullToRefresh' },
+    { id: '16', title: 'SVGScreen', route: 'SVGScreen' },
 ];
 
 // 定义导航参数类型
@@ -39,6 +40,7 @@ export type ComponentStackParamList = {
     BottomSheetScreen: undefined;
     BottomSheetScreen1: undefined;
     PullToRefresh: undefined;
+    SVGScreen: undefined;
 };
 
 
