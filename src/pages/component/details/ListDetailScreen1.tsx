@@ -1,9 +1,7 @@
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import {RefreshControl, StyleSheet, Text, View} from 'react-native';
 import { useTheme } from '../../../theme/ThemeContext';
 import React, { useEffect, useState } from 'react';
 import { FlashList } from '@shopify/flash-list';
-import { Animated } from 'react-native';
-import { CollapsibleHeaderScrollView } from 'react-native-collapsible-header-views';
 
 interface ListItemProps {
     id: string;
@@ -21,10 +19,11 @@ const ListItem: React.FC<ListItemProps> = (item) => (
 export const ListDetailScreen1: React.FC = () => {
     const { colors } = useTheme();
     const [listData, setListData] = useState<ListItemProps[]>([]);
+    const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
         let list = [];
-        for (let i = 0; i < 300; i++) {
+        for (let i = 0; i < 20; i++) {
             const item: ListItemProps = {
                 id: i.toString(),
                 title: `Item ${i}`,
@@ -45,19 +44,37 @@ export const ListDetailScreen1: React.FC = () => {
     return (
         <View style={[styles.detailContainer, { backgroundColor: colors.background }]}>
 
-            <CollapsibleHeaderScrollView
-                CollapsibleHeaderComponent={<Header/>}
-                headerHeight={100}
-                statusBarHeight={Platform.OS === 'ios' ? 20 : 0}
-            >
-                <FlashList
-                    style={styles.listBox}
-                    data={listData}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => <ListItem {...item} />}
-                    estimatedItemSize={200}
-                />
-            </CollapsibleHeaderScrollView>
+            {/*<CollapsibleHeaderScrollView*/}
+            {/*    CollapsibleHeaderComponent={<Header/>}*/}
+            {/*    headerHeight={100}*/}
+            {/*    statusBarHeight={Platform.OS === 'ios' ? 20 : 0}*/}
+            {/*>*/}
+            {/*    <FlashList*/}
+            {/*        style={styles.listBox}*/}
+            {/*        data={listData}*/}
+            {/*        keyExtractor={(item) => item.id}*/}
+            {/*        renderItem={({ item }) => <ListItem {...item} />}*/}
+            {/*        estimatedItemSize={200}*/}
+            {/*    />*/}
+            {/*</CollapsibleHeaderScrollView>*/}
+
+
+            <FlashList
+                refreshControl = {
+                    <RefreshControl refreshing={refreshing} onRefresh={()=>{
+                        setRefreshing(true);
+                        setTimeout(() => {
+                            setRefreshing(false);
+                        },1000);
+                    }}/>
+                }
+
+                style={styles.listBox}
+                data={listData}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => <ListItem {...item} />}
+                estimatedItemSize={200}
+            />
 
 
         </View>

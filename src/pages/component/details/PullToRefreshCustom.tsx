@@ -16,10 +16,11 @@ import Animated, {
     withTiming,
 } from 'react-native-reanimated';
 import LottieView from 'lottie-react-native';
+import {AnimatedFlashList} from "@shopify/flash-list";
 
 const { width } = Dimensions.get('screen');
 
-export const PullToRefresh = () => {
+export const PullToRefreshCustom = () => {
     const scrollPosition = useSharedValue(0);
     const insets = useSafeAreaInsets();
     const pullDownPosition = useSharedValue(0);
@@ -142,7 +143,7 @@ export const PullToRefresh = () => {
                 ]}
                 {...panResponderRef.current.panHandlers}
             >
-                <Animated.FlatList
+                <AnimatedFlashList
                     data={data}
                     scrollEventThrottle={16}
                     renderItem={renderItem}
@@ -151,7 +152,7 @@ export const PullToRefresh = () => {
                         <View style={styles.itemSeparatorStyle} />
                     )}
                     onScroll={scrollHandler}
-                    numColumns={2}
+                    // numColumns={1}
                     showsVerticalScrollIndicator={false}
                     overScrollMode="never"
                 />

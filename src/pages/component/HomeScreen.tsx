@@ -21,7 +21,7 @@ const ModalDetailScreen = lazy(() => import('./details/ModalDetailScreen').then(
 const ScrollViewDetailScreen = lazy(() => import('./details/ScrollViewDetailScreen').then(module => ({ default: module.ScrollViewDetailScreen })));
 const BottomSheetScreen = lazy(() => import('./details/BottomSheetScreen').then(module => ({ default: module.BottomSheetScreen })));
 const BottomSheetScreen1 = lazy(() => import('./details/BottomSheetScreen1').then(module => ({ default: module.BottomSheetScreen1 })));
-const PullToRefresh = lazy(() => import('./details/PullToRefresh').then(module => ({ default: module.PullToRefresh })));
+const PullToRefresh = lazy(() => import('./details/PullToRefreshCustom.tsx').then(module => ({ default: module.PullToRefreshCustom })));
 const SVGScreen = lazy(() => import('./details/SVGScreen').then(module => ({ default: module.SVGScreen })));
 
 const Stack = createStackNavigator<ComponentStackParamList>();

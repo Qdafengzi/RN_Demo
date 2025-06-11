@@ -3,11 +3,11 @@ import CustomViewGroup from "../../../../specs/RTNViewGroupNativeComponent"
 import {useTheme} from "@react-navigation/native";
 import {usePageReport} from "../../../hooks/usePageReport";
 import {useEffect, useState} from "react";
-import {PullToRefresh} from "../../component/details/PullToRefresh.tsx";
-import PullToRefreshNativeComponent from "../../../../specs/PullToRefreshNativeComponent.ts";
+import {PullToRefreshCustom} from "../../component/details/PullToRefreshCustom.tsx";
 import type {DirectEventHandler} from "react-native/Libraries/Types/CodegenTypes";
 import {logger} from "react-native-reanimated/lib/typescript/logger";
 import {numberAsInset} from "react-native-gesture-handler/lib/typescript/components/Pressable/utils";
+import PullToRefresh from "../../../component/pulltorefresh/PullToRefresh.ts";
 
 
 // 定义列表项的数据结构
@@ -83,7 +83,7 @@ export const PullToRefreshPage = () => {
 
     return (
         <View style={[styles.detailContainer, {backgroundColor: colors.background}]}>
-            <PullToRefreshNativeComponent
+            <PullToRefresh
                 style={{width:'100%',height:'100%',backgroundColor:colors.background,marginHorizontal:16}}
                 isLoadMore = {isLoadMore}
                 isRefreshing ={isRefreshing}
@@ -107,7 +107,7 @@ export const PullToRefreshPage = () => {
                 {/*    <Text>555</Text>*/}
                 {/*</ScrollView>*/}
 
-            </PullToRefreshNativeComponent>
+            </PullToRefresh>
 
         </View>
     )

@@ -6,21 +6,12 @@ type PullToRefreshOnRefreshEvent = {
 
 };
 
-type PullToRefreshOnLoadMoreEvent = {
-
-};
-
 export interface NativeProps extends ViewProps {
     onRefresh?: BubblingEventHandler<PullToRefreshOnRefreshEvent> | null;
-    onLoadMore?: BubblingEventHandler<PullToRefreshOnLoadMoreEvent> | null;
     isRefreshing?: boolean;
-    isLoadMore?: boolean;
-    noMoreData?: boolean;
-    enableLoadMore?: boolean;
-    enableRefresh?: boolean;
 }
 
-export default codegenNativeComponent<NativeProps>('NativePullToRefresh',
+export default codegenNativeComponent<NativeProps>('NativePullToRefreshHeader',
     {
         // 指定组件接受子节点
         interfaceOnly: true,

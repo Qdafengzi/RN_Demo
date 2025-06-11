@@ -6,7 +6,6 @@ import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost
 import com.facebook.react.ReactNativeHost
 import com.facebook.react.ReactPackage
-import com.facebook.react.TurboReactPackage
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
 import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
@@ -16,6 +15,7 @@ import com.rn_demo.bridge.CommonNativePackage
 import com.rn_demo.bridge.box.ReactViewGroupBoxPackage
 import com.rn_demo.bridge.compose.slider.RTNSliderComposePackage
 import com.rn_demo.bridge.pulltorefresh.ReactPullToRefreshPackage
+import com.rn_demo.bridge.pulltorefresh.header.ReactPullToRefreshHeaderPackage
 import com.rn_demo.bridge.slider.RTNSliderPackage
 import com.rn_demo.bridge.text.RTNCenteredTextPackage
 import com.rn_demo.bridge.webview.ReactWebViewPackage
@@ -32,6 +32,7 @@ class MainApplication : Application(), ReactApplication {
                add(ReactWebViewPackage())
                add(ReactViewGroupBoxPackage())
                add(ReactPullToRefreshPackage())
+               add(ReactPullToRefreshHeaderPackage())
                add(CommonNativePackage())
             }
 

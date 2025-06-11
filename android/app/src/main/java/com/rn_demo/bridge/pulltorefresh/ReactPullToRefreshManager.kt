@@ -1,24 +1,23 @@
 package com.rn_demo.bridge.pulltorefresh
 
+import android.view.View
 import android.view.ViewGroup
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.ViewManagerDelegate
-import com.facebook.react.viewmanagers.PullToRefreshManagerDelegate
-import com.facebook.react.viewmanagers.PullToRefreshManagerInterface
+import com.facebook.react.viewmanagers.NativePullToRefreshManagerInterface
+import com.facebook.react.viewmanagers.NativePullToRefreshManagerDelegate
 import com.rn_demo.utils.XLogger
-import com.scwang.smart.refresh.footer.ClassicsFooter
-import com.scwang.smart.refresh.header.ClassicsHeader
 
 @ReactModule(name = ReactPullToRefreshManager.NAME)
-class ReactPullToRefreshManager : ViewGroupManager<ReactPullToRefresh>(), PullToRefreshManagerInterface<ReactPullToRefresh> {
+class ReactPullToRefreshManager : ViewGroupManager<ReactPullToRefresh>(), NativePullToRefreshManagerInterface<ReactPullToRefresh> {
     companion object {
-        const val NAME = "PullToRefresh"
+        const val NAME = "NativePullToRefresh"
     }
 
     private val mDelegate: ViewManagerDelegate<ReactPullToRefresh> =
-        PullToRefreshManagerDelegate(this)
+        NativePullToRefreshManagerDelegate(this)
 
     override fun getName(): String = NAME
 
@@ -28,25 +27,27 @@ class ReactPullToRefreshManager : ViewGroupManager<ReactPullToRefresh>(), PullTo
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
-            setRefreshHeader(ClassicsHeader(reactContext))
-            setRefreshFooter(ClassicsFooter(reactContext))
+            setEnableOverScrollBounce(false)
+            setEnableOverScrollDrag(true)
         }
         return view
     }
 
     override fun getDelegate(): ViewManagerDelegate<ReactPullToRefresh> = mDelegate
 
+    private val reactChildMap = HashMap<Int, View>()
+
     override fun setIsRefreshing(view: ReactPullToRefresh?, value: Boolean) {
         XLogger.d("setIsRefreshing----------->${value}")
         if (!value){
-            view?.finishRefresh()
+            view?.finishRefresh(true)
         }
     }
 
     override fun setIsLoadMore(view: ReactPullToRefresh?, value: Boolean) {
         XLogger.d("setIsLoadMore----------->")
         if (!value){
-            view?.finishLoadMore()
+            view?.finishLoadMore(true)
         }
     }
 
