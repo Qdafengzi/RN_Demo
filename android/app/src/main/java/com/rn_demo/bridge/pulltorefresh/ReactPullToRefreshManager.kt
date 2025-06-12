@@ -8,6 +8,7 @@ import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.ViewManagerDelegate
 import com.facebook.react.viewmanagers.NativePullToRefreshManagerInterface
 import com.facebook.react.viewmanagers.NativePullToRefreshManagerDelegate
+import com.rn_demo.bridge.pulltorefresh.header.ReactPullToRefreshHeader
 import com.rn_demo.utils.XLogger
 
 @ReactModule(name = ReactPullToRefreshManager.NAME)
@@ -33,9 +34,37 @@ class ReactPullToRefreshManager : ViewGroupManager<ReactPullToRefresh>(), Native
         return view
     }
 
-    override fun getDelegate(): ViewManagerDelegate<ReactPullToRefresh> = mDelegate
-
     private val reactChildMap = HashMap<Int, View>()
+
+    override fun addView(parent: ReactPullToRefresh, child: View, index: Int) {
+        XLogger.d("addView :${child}")
+        if (child is ReactPullToRefreshHeader) {
+            parent.setEnableRefresh(true)
+            parent.setRefreshHeader(child)
+            if (parent.isLaidOut) {
+                child.onInitialized(parent.getRefreshKernel(), 0, 0)
+            }
+        } else {
+            parent.setRefreshContent(child)
+        }
+        reactChildMap[index] = child
+    }
+
+    override fun removeViewAt(parent: ReactPullToRefresh, index: Int) {
+
+        reactChildMap.forEach { t, u ->
+            if (u is ReactPullToRefreshHeader){
+                parent.setEnableRefresh(false)
+                //parent.setOnRefreshListener(null)//
+            }else{
+
+            }
+            super.removeViewAt(parent, index)
+        }
+
+        reactChildMap.remove(index)
+    }
+    override fun getDelegate(): ViewManagerDelegate<ReactPullToRefresh> = mDelegate
 
     override fun setIsRefreshing(view: ReactPullToRefresh?, value: Boolean) {
         XLogger.d("setIsRefreshing----------->${value}")

@@ -28,7 +28,7 @@ class ReactPullToRefresh : SmartRefreshLayout {
     private fun configureComponent() {
         mRect = Rect()
 
-        setRefreshHeader(ReactPullToRefreshHeader(context))
+        //setRefreshHeader(ReactPullToRefreshHeader(context))
         setRefreshFooter(ClassicsFooter(context))
         setEnableHeaderTranslationContent(true)
         setEnableFooterTranslationContent(true)

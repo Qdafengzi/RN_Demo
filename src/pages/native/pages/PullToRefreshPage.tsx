@@ -1,13 +1,9 @@
-import {FlatList, ScrollView, StyleSheet, Text, View} from "react-native"
-import CustomViewGroup from "../../../../specs/RTNViewGroupNativeComponent"
-import {useTheme} from "@react-navigation/native";
-import {usePageReport} from "../../../hooks/usePageReport";
-import {useEffect, useState} from "react";
-import {PullToRefreshCustom} from "../../component/details/PullToRefreshCustom.tsx";
-import type {DirectEventHandler} from "react-native/Libraries/Types/CodegenTypes";
-import {logger} from "react-native-reanimated/lib/typescript/logger";
-import {numberAsInset} from "react-native-gesture-handler/lib/typescript/components/Pressable/utils";
-import PullToRefresh from "../../../component/pulltorefresh/PullToRefresh.ts";
+import {StyleSheet, Text, View} from 'react-native';
+import {useTheme} from '@react-navigation/native';
+import {usePageReport} from '../../../hooks/usePageReport';
+import React, {useEffect, useState} from 'react';
+import {FlashList} from '@shopify/flash-list';
+import {PullToRefresh} from '../../../component/pulltorefresh/PullToRefresh';
 
 
 // 定义列表项的数据结构
@@ -16,49 +12,49 @@ interface ListItem {
     title: string;
 }
 
-export const PullToRefreshPage = () => {
+export const PullToRefreshPage: React.FC = () => {
     const {colors} = useTheme();
     const {reportEvent} = usePageReport('PullToRefreshPage');
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [isLoadMore, setIsLoadMore] = useState(false);
 
-    const [list,setList] = useState<ListItem[]>([]);
+    const [list, setList] = useState<ListItem[]>([]);
 
-    function initData(){
+    function initData() {
         setIsRefreshing(true);
         const DATA: ListItem[] = [
-            { id: '1', title: 'Item 1' },
-            { id: '2', title: 'Item 2' },
-            { id: '3', title: 'Item 3' },
-            { id: '4', title: 'Item 4' },
-            { id: '5', title: 'Item 5' },
-            { id: '6', title: 'Item 6' },
-            { id: '7', title: 'Item 7' },
-            { id: '8', title: 'Item 8' },
-            { id: '9', title: 'Item 9' },
-            { id: '10', title: 'Item 10' },
+            {id: '1', title: 'Item 1'},
+            {id: '2', title: 'Item 2'},
+            {id: '3', title: 'Item 3'},
+            {id: '4', title: 'Item 4'},
+            {id: '5', title: 'Item 5'},
+            {id: '6', title: 'Item 6'},
+            {id: '7', title: 'Item 7'},
+            {id: '8', title: 'Item 8'},
+            {id: '9', title: 'Item 9'},
+            {id: '10', title: 'Item 10'},
         ];
 
         setTimeout(() => {
             setIsRefreshing(false);
             setList(DATA);
-        },1000);
+        }, 1000);
     }
 
     useEffect(() => {
-        initData()
+        initData();
     }, []);
 
 
 
     // 列表项组件
-    const Item = ({ title }: { title: string }) => (
+    const Item = ({title}: { title: string }) => (
         <View style={styles.item}>
             <Text style={styles.title}>{title}</Text>
         </View>
     );
 
-    function refresh(){
+    function refresh() {
         initData();
     }
 
@@ -67,7 +63,7 @@ export const PullToRefreshPage = () => {
         title: `Item ${index}`,
     });
 
-    function loadMore(){
+    function loadMore() {
         setIsLoadMore(true);
         const newItems: ListItem[] = [];
         const lastIndex = list.length + 1;
@@ -77,42 +73,31 @@ export const PullToRefreshPage = () => {
         }
         setTimeout(() => {
             setIsLoadMore(false);
-            setList([...list,...newItems]);
-        },1000);
+            setList([...list, ...newItems]);
+        }, 1000);
     }
 
     return (
         <View style={[styles.detailContainer, {backgroundColor: colors.background}]}>
             <PullToRefresh
-                style={{width:'100%',height:'100%',backgroundColor:colors.background,marginHorizontal:16}}
-                isLoadMore = {isLoadMore}
-                isRefreshing ={isRefreshing}
+                style={{width: '100%', flex: 1}}
+                isLoadMore={isLoadMore}
+                isRefreshing={isRefreshing}
                 onRefresh={refresh}
                 onLoadMore={loadMore}
-            >
-
-                <FlatList
-                    nestedScrollEnabled={true}
-                    data={list}
-                    renderItem={({ item }) => <Item title={item.title} />}
-                    keyExtractor={item => item.id}
-                />
-
-                {/*<ScrollView nestedScrollEnabled={true} style={{paddingHorizontal:16}}>*/}
-                {/*    <Text>555</Text>*/}
-                {/*    <Text>555</Text>*/}
-                {/*    <Text>555</Text>*/}
-                {/*    <Text>555</Text>*/}
-                {/*    <Text>555</Text>*/}
-                {/*    <Text>555</Text>*/}
-                {/*</ScrollView>*/}
-
-            </PullToRefresh>
-
+                children={
+                    <FlashList
+                        nestedScrollEnabled={true}
+                        data={list}
+                        renderItem={({item}) => <Item title={item.title}/>}
+                        keyExtractor={item => item.id}
+                    />
+                }
+            />
         </View>
-    )
+    );
 
-}
+};
 
 const styles = StyleSheet.create({
     detailContainer: {
@@ -143,4 +128,4 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#333',
     },
-})
+});
