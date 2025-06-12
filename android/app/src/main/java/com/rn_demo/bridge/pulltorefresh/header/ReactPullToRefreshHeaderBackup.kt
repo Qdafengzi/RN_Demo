@@ -2,21 +2,39 @@ package com.rn_demo.bridge.pulltorefresh.header
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
-import androidx.appcompat.widget.LinearLayoutCompat
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.events.Event
-import com.rn_demo.bridge.pulltorefresh.CustomHeaderViewModel
-import com.rn_demo.utils.XLogger
+import com.rn_demo.R
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshKernel
 import com.scwang.smart.refresh.layout.api.RefreshLayout
@@ -24,8 +42,16 @@ import com.scwang.smart.refresh.layout.constant.RefreshState
 import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 
 
+class CustomHeaderViewModel : ViewModel() {
+    var text by mutableStateOf("下拉刷新中")
+}
 
-class ReactPullToRefreshHeader : LinearLayoutCompat, RefreshHeader {
+
+class ReactPullToRefreshHeaderBackup : LinearLayout, RefreshHeader {
+
+    private val mViewModel  by lazy {
+        CustomHeaderViewModel()
+    }
     constructor(context: Context) : super(context) {
         configureComponent()
     }
@@ -34,85 +60,71 @@ class ReactPullToRefreshHeader : LinearLayoutCompat, RefreshHeader {
         configureComponent()
     }
 
-//    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-//        val measureModel = MeasureSpec.getMode(heightMeasureSpec)
-//        var newHeightMeasureSpec = heightMeasureSpec
-//        if (measureModel == MeasureSpec.AT_MOST){
-//            newHeightMeasureSpec = MeasureSpec.makeMeasureSpec(measuredHeight,MeasureSpec.EXACTLY)
-//        }
-//        super.onMeasure(widthMeasureSpec, newHeightMeasureSpec)
-//
-//        if (parent is ReactPullToRefresh && mRefreshKernel ==null){
-//            val h = MeasureSpec.getSize(newHeightMeasureSpec)
-//            (parent as ReactPullToRefresh).setHeaderHeight(h.toFloat())
-//        }
-//    }
-
-//    private val headerLocalData: PullToRefreshHeaderLocalData = PullToRefreshHeaderLocalData()
-
-//    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-//        super.onLayout(changed, left, top, right, bottom)
-//        if (headerLocalData.viewRect.top == top && headerLocalData.viewRect.bottom == bottom && headerLocalData.viewRect.left == left && headerLocalData.viewRect.right == right) {
-//            XLogger.d("layout----0")
-//            return
-//        }
-//        XLogger.d("layout----:top:${top} bottom:${bottom} left:$left  right:${right}" )
-//        headerLocalData.viewRect.top = top
-//        headerLocalData.viewRect.bottom = bottom
-//        headerLocalData.viewRect.left = left
-//        headerLocalData.viewRect.right = right
-//        val context = context
-//        if (context is ReactContext) {
-//            val uiManagerModule = context.getNativeModule(UIManagerModule::class.java)
-//            XLogger.d("设置信息")
-//            uiManagerModule?.setViewLocalData(id, headerLocalData)
-//        }
-//    }
-
-
     private fun configureComponent() {
+        removeAllViews()
+        val composeView = ComposeView(context)
         gravity = Gravity.CENTER_HORIZONTAL
-        orientation = VERTICAL
-
-        viewTreeObserver.addOnGlobalLayoutListener {
-            XLogger.d("view大小:${this.height}")
+        addView(composeView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        composeView.setContent {
+            val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.loading2))
+            val progress by animateLottieCompositionAsState(
+                composition,
+                iterations = LottieConstants.IterateForever
+            )
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .height(80.dp)
+//                .background(color = Color.Yellow)
+                ,
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                LottieAnimation(
+                    composition = composition,
+                    progress = { progress },
+                    modifier = Modifier
+                        .size(60.dp, 60.dp)
+//                        .background(color = Color.Magenta)
+                    ,
+                )
+                Text(
+                    text = mViewModel.text,
+                    color = Color.Black,
+                    modifier = Modifier
+//                        .background(color = Color.Cyan)
+                )
+            }
         }
+//        minimumHeight = ResUtils.dp2px(context, 100f)
     }
 
     @SuppressLint("RestrictedApi")
     override fun onStateChanged(refreshLayout: RefreshLayout,
         oldState: RefreshState,
         newState: RefreshState) {
-        XLogger.d("onStateChanged:${newState}")
         when (newState) {
             RefreshState.None -> {}
             RefreshState.PullDownToRefresh -> {
-                onStateChangedEvent("PullDownToRefresh")
+                mViewModel.text = "下拉开始刷新"
             }
 
             RefreshState.PullUpToLoad -> {}
             RefreshState.PullDownCanceled -> {}
             RefreshState.PullUpCanceled -> {}
             RefreshState.ReleaseToRefresh -> {
-                onStateChangedEvent("ReleaseToRefresh")
+                mViewModel.text = "释放立即刷新"
             }
-
             RefreshState.ReleaseToLoad -> {}
             RefreshState.ReleaseToTwoLevel -> {}
             RefreshState.TwoLevelReleased -> {}
-            RefreshState.RefreshReleased -> {
-                onStateChangedEvent("RefreshReleased")
-            }
+            RefreshState.RefreshReleased -> {}
             RefreshState.LoadReleased -> {}
             RefreshState.Refreshing -> {
-                onStateChangedEvent("Refreshing")
+                mViewModel.text = "正在刷新"
             }
-
             RefreshState.Loading -> {}
             RefreshState.TwoLevel -> {}
-            RefreshState.RefreshFinish -> {
-                onStateChangedEvent("RefreshFinish")
-            }
+            RefreshState.RefreshFinish -> {}
             RefreshState.LoadFinish -> {}
             RefreshState.TwoLevelFinish -> {}
         }
@@ -130,10 +142,10 @@ class ReactPullToRefreshHeader : LinearLayoutCompat, RefreshHeader {
 
     }
 
-    private var mRefreshKernel: RefreshKernel? = null
-    private var mIsRefreshing: Boolean = false
+    private var mRefreshKernel:RefreshKernel?=null
+    private var mIsRefreshing :Boolean = false
 
-    fun setIsRefreshing(refreshing: Boolean) {
+    fun setIsRefreshing(refreshing:Boolean){
         mIsRefreshing = refreshing
     }
 
@@ -178,22 +190,40 @@ class ReactPullToRefreshHeader : LinearLayoutCompat, RefreshHeader {
         return true
     }
 
-    private fun onStateChangedEvent(state: String) {
+    private fun onRefreshEvent() {
         val reactContext = context as ReactContext
         val surfaceId = UIManagerHelper.getSurfaceId(reactContext)
         val eventDispatcher = UIManagerHelper.getEventDispatcherForReactTag(reactContext, id)
         val payload = Arguments.createMap()
-        payload.putString("state", state)
-        val event = HeaderStateEvent(surfaceId, id, payload)
+        val event = PullToRefreshOnRefreshEvent(surfaceId, id, payload)
         eventDispatcher?.dispatchEvent(event)
     }
 
-    inner class HeaderStateEvent(
+    private fun onLoadMoreEvent() {
+        val reactContext = context as ReactContext
+        val surfaceId = UIManagerHelper.getSurfaceId(reactContext)
+        val eventDispatcher = UIManagerHelper.getEventDispatcherForReactTag(reactContext, id)
+        val payload = Arguments.createMap()
+        val event = PullToRefreshOnLoadMoreEvent(surfaceId, id, payload)
+        eventDispatcher?.dispatchEvent(event)
+    }
+
+    inner class PullToRefreshOnLoadMoreEvent(
         surfaceId: Int,
         viewId: Int,
         private val payload: WritableMap
-    ) : Event<HeaderStateEvent>(surfaceId, viewId) {
-        override fun getEventName() = "onStateChange"
+    ) : Event<PullToRefreshOnLoadMoreEvent>(surfaceId, viewId) {
+        override fun getEventName() = "onLoadMore"
         override fun getEventData() = payload
     }
+
+    inner class PullToRefreshOnRefreshEvent(
+        surfaceId: Int,
+        viewId: Int,
+        private val payload: WritableMap
+    ) : Event<PullToRefreshOnRefreshEvent>(surfaceId, viewId) {
+        override fun getEventName() = "onRefresh"
+        override fun getEventData() = payload
+    }
+
 }

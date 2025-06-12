@@ -1,11 +1,39 @@
 import NativePullToRefresh, {NativePullToRefreshProps} from '../../../specs/PullToRefreshNativeComponent';
 import NativePullToRefreshHeader from '../../../specs/PullToRefreshHeaderNativeComponent';
-import React from 'react';
+import React, {useState} from 'react';
+import {StyleSheet, Text} from 'react-native';
+import LottieView from 'lottie-react-native';
+import {HeaderStates} from './HeaderState.ts';
 
 export interface PullToRefreshProps extends NativePullToRefreshProps {
     children?: React.ReactNode;
 }
+
 export const PullToRefresh: React.FC<PullToRefreshProps> = (props) => {
+
+    const [refreshState, setRefreshState] = useState('下拉刷新');
+
+    const onStateChange = (event: { nativeEvent: { state: string } }) => {
+        console.log('当前状态为:', event.nativeEvent.state);
+        switch (event.nativeEvent.state) {
+            case HeaderStates.PullDownToRefresh:
+                setRefreshState('下拉刷新');
+                break;
+            case HeaderStates.RefreshFinish:
+                break;
+            case HeaderStates.Refreshing:
+                setRefreshState('正在刷新……');
+                break;
+            case HeaderStates.ReleaseToRefresh:
+                setRefreshState('释放刷新');
+                break;
+            case HeaderStates.RefreshReleased:
+                break;
+            default:
+                break;
+        }
+    };
+
     return (
         <NativePullToRefresh
             style={props.style}
@@ -17,8 +45,40 @@ export const PullToRefresh: React.FC<PullToRefreshProps> = (props) => {
             enableLoadMore={props.enableLoadMore}
             enableRefresh={props.enableRefresh}
         >
-            <NativePullToRefreshHeader/>
+            <NativePullToRefreshHeader
+                onStateChange={onStateChange}
+                style={customStyle.container}>
+                <LottieView
+                    source={require('../../assets/lottie/loading2.json')}
+                    autoPlay
+                    loop
+                    speed={0.5}
+                    style={customStyle.lottie}
+                />
+                <Text style={customStyle.text}>{refreshState}</Text>
+            </NativePullToRefreshHeader>
             {props.children}
         </NativePullToRefresh>
     );
 };
+
+const customStyle = StyleSheet.create({
+    container: {
+        width: '100%',
+        height: 100,
+    },
+    text: {
+        width: '100%',
+        textAlign: 'center',
+    },
+    lottie: {
+        width: 60,
+        height: 60,
+    },
+    box: {
+        width: '100%',
+        height: 100,
+        justifyContent: 'center',
+        flexDirection: 'column',
+    },
+});

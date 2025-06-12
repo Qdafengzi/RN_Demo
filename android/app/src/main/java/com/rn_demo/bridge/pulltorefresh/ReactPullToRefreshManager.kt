@@ -51,7 +51,6 @@ class ReactPullToRefreshManager : ViewGroupManager<ReactPullToRefresh>(), Native
     }
 
     override fun removeViewAt(parent: ReactPullToRefresh, index: Int) {
-
         reactChildMap.forEach { t, u ->
             if (u is ReactPullToRefreshHeader){
                 parent.setEnableRefresh(false)

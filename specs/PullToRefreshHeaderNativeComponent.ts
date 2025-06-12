@@ -2,12 +2,12 @@ import type {HostComponent, ViewProps} from 'react-native';
 import type {BubblingEventHandler} from 'react-native/Libraries/Types/CodegenTypes';
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
 
-type PullToRefreshOnRefreshEvent = {
-
+type HeaderStateEvent = {
+    state: string;
 };
 
 export interface NativePullToRefreshHeaderProps extends ViewProps {
-    onRefresh?: BubblingEventHandler<PullToRefreshOnRefreshEvent> | null;
+    onStateChange?: BubblingEventHandler<HeaderStateEvent> | null;
     isRefreshing?: boolean;
 }
 
