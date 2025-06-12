@@ -32,5 +32,5 @@
 
    
    
-      
+ <img src="gif/pulltoRefresh.gif" width="30%">     
    
