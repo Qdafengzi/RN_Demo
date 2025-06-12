@@ -11,9 +11,4 @@ export interface NativePullToRefreshHeaderProps extends ViewProps {
     isRefreshing?: boolean;
 }
 
-export default codegenNativeComponent<NativePullToRefreshHeaderProps>('NativePullToRefreshHeader',
-    {
-        // 指定组件接受子节点
-        interfaceOnly: true,
-    }
-) as HostComponent<NativePullToRefreshHeaderProps>;
+export default codegenNativeComponent<NativePullToRefreshHeaderProps>('NativePullToRefreshHeader') as HostComponent<NativePullToRefreshHeaderProps>;

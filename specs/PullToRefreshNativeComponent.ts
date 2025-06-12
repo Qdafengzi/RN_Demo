@@ -20,9 +20,4 @@ export interface NativePullToRefreshProps extends ViewProps {
     enableRefresh?: boolean;
 }
 
-export default codegenNativeComponent<NativePullToRefreshProps>('NativePullToRefresh',
-    {
-        // 指定组件接受子节点
-        interfaceOnly: true,
-    }
-) as HostComponent<NativePullToRefreshProps>;
+export default codegenNativeComponent<NativePullToRefreshProps>('NativePullToRefresh') as HostComponent<NativePullToRefreshProps>;
