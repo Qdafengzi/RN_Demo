@@ -80,7 +80,7 @@ export const PullToRefreshPage: React.FC = () => {
     return (
         <View style={[styles.detailContainer, {backgroundColor: colors.background}]}>
             <PullToRefresh
-                style={{width: '100%', flex: 1}}
+                style={styles.listBox}
                 isLoadMore={isLoadMore}
                 isRefreshing={isRefreshing}
                 onRefresh={refresh}
@@ -127,5 +127,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 16,
         color: '#333',
+    },
+    listBox: {
+        width: '100%',
+        flex: 1,
     },
 });
