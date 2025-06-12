@@ -31,6 +31,6 @@
    - NativeEvent   
 
    
-   
- <img alt="gif/pullToRefresh.gif" width="30%">     
-   
+
+ <img src="gif/pullToRefresh.gif" width="30%">     
+
