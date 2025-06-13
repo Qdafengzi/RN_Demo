@@ -1,4 +1,4 @@
-package com.rn_demo.bridge.pulltorefresh.header
+package com.rn_demo.bridge.pulltorefresh.footer
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,21 +6,22 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.events.Event
 import com.rn_demo.utils.XLogger
-import com.scwang.smart.refresh.layout.api.RefreshHeader
+import com.scwang.smart.refresh.layout.api.RefreshFooter
 import com.scwang.smart.refresh.layout.api.RefreshKernel
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.constant.RefreshState
 import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 
 
-
-class ReactPullToRefreshHeader : LinearLayoutCompat, RefreshHeader {
+class ReactPullToRefreshFooter : LinearLayoutCompat, RefreshFooter {
     constructor(context: Context) : super(context) {
         configureComponent()
     }
@@ -29,13 +30,28 @@ class ReactPullToRefreshHeader : LinearLayoutCompat, RefreshHeader {
         configureComponent()
     }
 
+    private var mRefreshKernel: RefreshKernel? = null
+    private var mNoMoreData: Boolean = false
+
     private fun configureComponent() {
         gravity = Gravity.CENTER_HORIZONTAL
-        orientation = VERTICAL
+        orientation = HORIZONTAL
 
         viewTreeObserver.addOnGlobalLayoutListener {
             XLogger.d("view大小:${this.height}")
         }
+
+        setBackgroundColor(Color.Red.toArgb())
+    }
+
+    @SuppressLint("RestrictedApi")
+    override fun setNoMoreData(noMoreData: Boolean): Boolean {
+        mNoMoreData = noMoreData
+        if (mRefreshKernel != null) {
+            mRefreshKernel?.refreshLayout?.setNoMoreData(noMoreData)
+            return noMoreData
+        }
+        return false
     }
 
     @SuppressLint("RestrictedApi")
@@ -45,35 +61,47 @@ class ReactPullToRefreshHeader : LinearLayoutCompat, RefreshHeader {
         XLogger.d("onStateChanged:${newState}")
         when (newState) {
             RefreshState.None -> {}
-            RefreshState.PullDownToRefresh -> {
-                onStateChangedEvent("PullDownToRefresh")
+            RefreshState.PullDownCanceled -> {}
+
+            RefreshState.PullUpToLoad -> {
+                onStateChangedEvent("PullUpToLoad")
             }
 
-            RefreshState.PullUpToLoad -> {}
-            RefreshState.PullDownCanceled -> {}
-            RefreshState.PullUpCanceled -> {}
+            RefreshState.PullUpCanceled -> {
+                onStateChangedEvent("PullUpCanceled")
+            }
+
+            RefreshState.LoadReleased -> {
+                onStateChangedEvent("LoadReleased")
+            }
+
+            RefreshState.Loading -> {
+                onStateChangedEvent("Loading")
+            }
+
+            RefreshState.LoadFinish -> {
+                onStateChangedEvent("LoadFinish")
+            }
+
             RefreshState.ReleaseToRefresh -> {
-                onStateChangedEvent("ReleaseToRefresh")
+
             }
 
             RefreshState.ReleaseToLoad -> {}
             RefreshState.ReleaseToTwoLevel -> {}
             RefreshState.TwoLevelReleased -> {}
             RefreshState.RefreshReleased -> {
-                onStateChangedEvent("RefreshReleased")
-            }
-            RefreshState.LoadReleased -> {}
-            RefreshState.Refreshing -> {
-                onStateChangedEvent("Refreshing")
             }
 
-            RefreshState.Loading -> {}
+            RefreshState.Refreshing -> {
+            }
+
             RefreshState.TwoLevel -> {}
             RefreshState.RefreshFinish -> {
-                onStateChangedEvent("RefreshFinish")
             }
-            RefreshState.LoadFinish -> {}
+
             RefreshState.TwoLevelFinish -> {}
+            else -> {}
         }
     }
 
@@ -89,12 +117,6 @@ class ReactPullToRefreshHeader : LinearLayoutCompat, RefreshHeader {
 
     }
 
-    private var mRefreshKernel: RefreshKernel? = null
-    private var mIsRefreshing: Boolean = false
-
-    fun setIsRefreshing(refreshing: Boolean) {
-        mIsRefreshing = refreshing
-    }
 
     @SuppressLint("RestrictedApi")
     override fun onInitialized(kernel: RefreshKernel, height: Int, maxDragHeight: Int) {
@@ -137,21 +159,22 @@ class ReactPullToRefreshHeader : LinearLayoutCompat, RefreshHeader {
         return true
     }
 
+
     private fun onStateChangedEvent(state: String) {
         val reactContext = context as ReactContext
         val surfaceId = UIManagerHelper.getSurfaceId(reactContext)
         val eventDispatcher = UIManagerHelper.getEventDispatcherForReactTag(reactContext, id)
         val payload = Arguments.createMap()
         payload.putString("state", state)
-        val event = HeaderStateEvent(surfaceId, id, payload)
+        val event = FooterStateEvent(surfaceId, id, payload)
         eventDispatcher?.dispatchEvent(event)
     }
 
-    inner class HeaderStateEvent(
+    inner class FooterStateEvent(
         surfaceId: Int,
         viewId: Int,
         private val payload: WritableMap
-    ) : Event<HeaderStateEvent>(surfaceId, viewId) {
+    ) : Event<FooterStateEvent>(surfaceId, viewId) {
         override fun getEventName() = "onStateChange"
         override fun getEventData() = payload
     }

@@ -1,4 +1,4 @@
-package com.rn_demo.bridge.pulltorefresh.header
+package com.rn_demo.bridge.pulltorefresh.footer
 
 import android.content.Context
 import android.view.View
@@ -9,25 +9,25 @@ import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.ViewManagerDelegate
-import com.facebook.react.viewmanagers.NativePullToRefreshHeaderManagerDelegate
-import com.facebook.react.viewmanagers.NativePullToRefreshHeaderManagerInterface
+import com.facebook.react.viewmanagers.NativePullToRefreshFooterManagerDelegate
+import com.facebook.react.viewmanagers.NativePullToRefreshFooterManagerInterface
 import com.rn_demo.utils.XLogger
 import kotlin.math.roundToInt
 
-@ReactModule(name = ReactPullToRefreshHeaderManager.NAME)
-class ReactPullToRefreshHeaderManager : ViewGroupManager<ReactPullToRefreshHeader>(), NativePullToRefreshHeaderManagerInterface<ReactPullToRefreshHeader> {
+@ReactModule(name = ReactPullToRefreshFooterManager.NAME)
+class ReactPullToRefreshFooterManager : ViewGroupManager<ReactPullToRefreshFooter>(), NativePullToRefreshFooterManagerInterface<ReactPullToRefreshFooter> {
     companion object {
-        const val NAME = "NativePullToRefreshHeader"
+        const val NAME = "NativePullToRefreshFooter"
     }
 
-    private val mDelegate: ViewManagerDelegate<ReactPullToRefreshHeader> = NativePullToRefreshHeaderManagerDelegate(this)
+    private val mDelegate: ViewManagerDelegate<ReactPullToRefreshFooter> = NativePullToRefreshFooterManagerDelegate(this)
 
-    override fun getDelegate(): ViewManagerDelegate<ReactPullToRefreshHeader> = mDelegate
+    override fun getDelegate(): ViewManagerDelegate<ReactPullToRefreshFooter> = mDelegate
 
     override fun getName(): String = NAME
 
-    override fun createViewInstance(reactContext: ThemedReactContext): ReactPullToRefreshHeader {
-        val view = ReactPullToRefreshHeader(reactContext).apply {
+    override fun createViewInstance(reactContext: ThemedReactContext): ReactPullToRefreshFooter {
+        val view = ReactPullToRefreshFooter(reactContext).apply {
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -36,24 +36,16 @@ class ReactPullToRefreshHeaderManager : ViewGroupManager<ReactPullToRefreshHeade
         return view
     }
 
-//    override fun createShadowNodeInstance(): LayoutShadowNode {
-//        return PullToRefreshHeaderShadowNode()
-//    }
-//
-//    override fun getShadowNodeClass(): Class<out LayoutShadowNode?> {
-//        return PullToRefreshHeaderShadowNode::class.java
-//    }
+    override fun setIsLoadingMore(view: ReactPullToRefreshFooter?, value: Boolean) {
 
-    override fun setIsRefreshing(view: ReactPullToRefreshHeader?, value: Boolean) {
-        view?.setIsRefreshing(value)
     }
 
-    override fun addViews(parent: ReactPullToRefreshHeader, views: MutableList<View>) {
+    override fun addViews(parent: ReactPullToRefreshFooter, views: MutableList<View>) {
         super.addViews(parent, views)
         XLogger.d("添加  addViews :${views.size}")
     }
 
-    override fun addView(parent: ReactPullToRefreshHeader, child: View, index: Int) {
+    override fun addView(parent: ReactPullToRefreshFooter, child: View, index: Int) {
         super.addView(parent, child, index)
         XLogger.d("添加的header:${child}")
         if (child is LottieAnimationView){

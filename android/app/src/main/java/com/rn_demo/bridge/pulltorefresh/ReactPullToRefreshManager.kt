@@ -8,6 +8,7 @@ import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.ViewManagerDelegate
 import com.facebook.react.viewmanagers.NativePullToRefreshManagerInterface
 import com.facebook.react.viewmanagers.NativePullToRefreshManagerDelegate
+import com.rn_demo.bridge.pulltorefresh.footer.ReactPullToRefreshFooter
 import com.rn_demo.bridge.pulltorefresh.header.ReactPullToRefreshHeader
 import com.rn_demo.utils.XLogger
 
@@ -44,6 +45,12 @@ class ReactPullToRefreshManager : ViewGroupManager<ReactPullToRefresh>(), Native
             if (parent.isLaidOut) {
                 child.onInitialized(parent.getRefreshKernel(), 0, 0)
             }
+        } else if (child is ReactPullToRefreshFooter){
+            parent.setEnableLoadMore(true)
+            parent.setRefreshFooter(child)
+            if (parent.isLaidOut) {
+                child.onInitialized(parent.getRefreshKernel(), 0, 0)
+            }
         } else {
             parent.setRefreshContent(child)
         }
@@ -51,12 +58,13 @@ class ReactPullToRefreshManager : ViewGroupManager<ReactPullToRefresh>(), Native
     }
 
     override fun removeViewAt(parent: ReactPullToRefresh, index: Int) {
-        reactChildMap.forEach { t, u ->
+        reactChildMap.forEach { (t, u) ->
             if (u is ReactPullToRefreshHeader){
                 parent.setEnableRefresh(false)
-                //parent.setOnRefreshListener(null)//
-            }else{
-
+                parent.setOnRefreshListener(null)
+            }else if (u is ReactPullToRefreshFooter){
+                parent.setEnableRefresh(false)
+                parent.setOnLoadMoreListener(null)
             }
             super.removeViewAt(parent, index)
         }
@@ -89,5 +97,9 @@ class ReactPullToRefreshManager : ViewGroupManager<ReactPullToRefresh>(), Native
 
     override fun setEnableRefresh(view: ReactPullToRefresh?, value: Boolean) {
         view?.setEnableRefresh(value)
+    }
+
+    override fun needsCustomLayoutForChildren(): Boolean {
+        return true
     }
 }

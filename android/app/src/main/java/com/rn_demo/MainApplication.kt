@@ -15,6 +15,7 @@ import com.rn_demo.bridge.CommonNativePackage
 import com.rn_demo.bridge.box.ReactViewGroupBoxPackage
 import com.rn_demo.bridge.compose.slider.RTNSliderComposePackage
 import com.rn_demo.bridge.pulltorefresh.ReactPullToRefreshPackage
+import com.rn_demo.bridge.pulltorefresh.footer.ReactPullToRefreshFooterPackage
 import com.rn_demo.bridge.pulltorefresh.header.ReactPullToRefreshHeaderPackage
 import com.rn_demo.bridge.slider.RTNSliderPackage
 import com.rn_demo.bridge.text.RTNCenteredTextPackage
@@ -33,6 +34,7 @@ class MainApplication : Application(), ReactApplication {
                add(ReactViewGroupBoxPackage())
                add(ReactPullToRefreshPackage())
                add(ReactPullToRefreshHeaderPackage())
+               add(ReactPullToRefreshFooterPackage())
                add(CommonNativePackage())
             }
 
