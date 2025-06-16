@@ -1,14 +1,6 @@
-import React, { useRef, useCallback, memo } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    PanResponder,
-    Dimensions,
-    StatusBar,
-} from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {Dimensions, PanResponder, StatusBar, StyleSheet, Text, View,} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Animated, {
     useAnimatedScrollHandler,
     useAnimatedStyle,
@@ -16,9 +8,14 @@ import Animated, {
     withTiming,
 } from 'react-native-reanimated';
 import LottieView from 'lottie-react-native';
-import {AnimatedFlashList} from "@shopify/flash-list";
+import {AnimatedFlashList} from '@shopify/flash-list';
 
-const { width } = Dimensions.get('screen');
+const {width} = Dimensions.get('screen');
+
+interface Item {
+    id: string;
+    title: string;
+}
 
 export const PullToRefreshCustom = () => {
     const scrollPosition = useSharedValue(0);
@@ -27,29 +24,19 @@ export const PullToRefreshCustom = () => {
     const isReadyToRefresh = useSharedValue(false);
     const isLoaderActive = useSharedValue(false);
 
+    const [list, setList] = useState<Item[]>();
 
-    const data = [
-        {
-            id: '1',
-            title: '按钮组件',
-            route: 'ButtonDetail',
-        },
-        {
-            id: '2',
-            title: '文本组件',
-            route: 'TextDetail',
-        },
-        {
-            id: '3',
-            title: '输入框组件',
-            route: 'InputDetail',
-        },
-        {
-            id: '4',
-            title: '列表组件1',
-            route: 'ListDetail1',
+    useEffect(() => {
+        let list = [];
+        for (let i = 0; i < 100; i++) {
+            const item: Item = {
+                id: i.toString(),
+                title: `Item ${i}`,
+            };
+            list.push(item);
         }
-    ]
+        setList(list);
+    }, []);
 
     const onRefresh = useCallback((done) => {
         isLoaderActive.value = true;
@@ -69,7 +56,7 @@ export const PullToRefreshCustom = () => {
         if (isReadyToRefresh.value) {
             isReadyToRefresh.value = false;
             onRefresh(() => {
-                pullDownPosition.value = withTiming(0, { duration: 180 });
+                pullDownPosition.value = withTiming(0, {duration: 180});
             });
         }
     };
@@ -102,7 +89,7 @@ export const PullToRefreshCustom = () => {
     });
 
     const pullDownStyle = useAnimatedStyle(() => ({
-        transform: [{ translateY: pullDownPosition.value }],
+        transform: [{translateY: pullDownPosition.value}],
     }));
 
     const refreshContainerStyle = useAnimatedStyle(() => ({
@@ -112,7 +99,7 @@ export const PullToRefreshCustom = () => {
     }));
 
     const renderItem = useCallback(
-        ({ item }) => (
+        ({item}) => (
             <View>
                 {/* <Image source={item.image} style={styles.image} resizeMode="cover" /> */}
                 <Text style={styles.title}>{item.title}</Text>
@@ -124,7 +111,7 @@ export const PullToRefreshCustom = () => {
 
     return (
         <View style={styles.container}>
-            <StatusBar backgroundColor={'#000'} />
+            <StatusBar backgroundColor={'#000'}/>
             <Animated.View style={[refreshContainerStyle, styles.loaderContainer]}>
                 <LottieView
                     source={require('../../../assets/lottie/lottie_loading.json')}
@@ -139,17 +126,17 @@ export const PullToRefreshCustom = () => {
                 style={[
                     pullDownStyle,
                     styles.pullDownStyles,
-                    { paddingTop: Math.max(insets.top, 15) },
+                    {paddingTop: Math.max(insets.top, 15)},
                 ]}
                 {...panResponderRef.current.panHandlers}
             >
                 <AnimatedFlashList
-                    data={data}
+                    data={list}
                     scrollEventThrottle={16}
                     renderItem={renderItem}
                     keyExtractor={(_, index) => index.toString()}
                     ItemSeparatorComponent={() => (
-                        <View style={styles.itemSeparatorStyle} />
+                        <View style={styles.itemSeparatorStyle}/>
                     )}
                     onScroll={scrollHandler}
                     // numColumns={1}
