@@ -73,6 +73,12 @@ class ReactPullToRefreshManager : ViewGroupManager<ReactPullToRefresh>(), Native
     }
     override fun getDelegate(): ViewManagerDelegate<ReactPullToRefresh> = mDelegate
 
+
+    override fun addEventEmitters(reactContext: ThemedReactContext, view: ReactPullToRefresh) {
+        super.addEventEmitters(reactContext, view)
+
+    }
+
     override fun setIsRefreshing(view: ReactPullToRefresh?, value: Boolean) {
         XLogger.d("setIsRefreshing----------->${value}")
         if (!value){

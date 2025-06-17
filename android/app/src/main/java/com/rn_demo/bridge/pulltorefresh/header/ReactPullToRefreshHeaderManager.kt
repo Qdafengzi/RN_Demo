@@ -7,10 +7,13 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import com.airbnb.lottie.LottieAnimationView
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.ThemedReactContext
+import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.ViewManagerDelegate
 import com.facebook.react.viewmanagers.NativePullToRefreshHeaderManagerDelegate
 import com.facebook.react.viewmanagers.NativePullToRefreshHeaderManagerInterface
+import com.rn_demo.bridge.pulltorefresh.OnRefreshChangeListener
+import com.rn_demo.bridge.pulltorefresh.PullToRefreshState
 import com.rn_demo.utils.XLogger
 import kotlin.math.roundToInt
 
@@ -43,6 +46,25 @@ class ReactPullToRefreshHeaderManager : ViewGroupManager<ReactPullToRefreshHeade
 //    override fun getShadowNodeClass(): Class<out LayoutShadowNode?> {
 //        return PullToRefreshHeaderShadowNode::class.java
 //    }
+
+    override fun addEventEmitters(reactContext: ThemedReactContext,
+        view: ReactPullToRefreshHeader) {
+        super.addEventEmitters(reactContext, view)
+//        val surfaceId = UIManagerHelper.getSurfaceId(reactContext)
+//        val id = view.id
+//        view.setOnRefreshHeaderChangeListener(object : OnRefreshChangeListener {
+//            override fun onRefresh() {
+//
+//            }
+//
+//            override fun onOffsetChange(offset: Int) {
+//            }
+//
+//            override fun onStateChanged(state: PullToRefreshState?) {
+//            }
+//
+//        })
+    }
 
     override fun setIsRefreshing(view: ReactPullToRefreshHeader?, value: Boolean) {
         view?.setIsRefreshing(value)

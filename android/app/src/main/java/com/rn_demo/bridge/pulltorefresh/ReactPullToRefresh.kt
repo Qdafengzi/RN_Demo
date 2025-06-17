@@ -9,8 +9,6 @@ import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.events.Event
-import com.rn_demo.bridge.pulltorefresh.header.ReactPullToRefreshHeader
-import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshKernel
 
@@ -93,4 +91,15 @@ class ReactPullToRefresh : SmartRefreshLayout {
         }
         super.dispatchDraw(canvas)
     }
+//    override fun requestLayout() {
+//        super.requestLayout()
+//        post(measureAndLayout)
+//    }
+//
+//    private val measureAndLayout = Runnable {
+//        measure(
+//            MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
+//            MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY))
+//        layout(left, top, right, bottom)
+//    }
 }

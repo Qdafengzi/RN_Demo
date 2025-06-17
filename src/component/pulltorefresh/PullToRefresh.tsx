@@ -2,7 +2,7 @@ import NativePullToRefresh, {NativePullToRefreshProps} from '../../../specs/Pull
 import NativePullToRefreshHeader from '../../../specs/PullToRefreshHeaderNativeComponent';
 import NativePullToRefreshFooter from '../../../specs/PullToRefreshFooterNativeComponent';
 import React, {useState} from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import LottieView from 'lottie-react-native';
 import {HeaderStates} from './HeaderState.ts';
 
@@ -81,11 +81,10 @@ export const PullToRefresh: React.FC<PullToRefreshProps> = (props) => {
             </NativePullToRefreshHeader>
             {props.children}
 
-
             <NativePullToRefreshFooter
                 onStateChange={footerOnStateChange}
                 isLoadingMore={props.isLoadMore}
-                style={customStyle.container}>
+                style={customStyle.footerContainer}>
                 <LottieView
                     source={require('../../assets/lottie/loading2.json')}
                     autoPlay
@@ -93,8 +92,7 @@ export const PullToRefresh: React.FC<PullToRefreshProps> = (props) => {
                     speed={0.5}
                     style={customStyle.lottie}
                 />
-                <Text style={customStyle.text}>正在加载</Text>
-
+                <Text style={customStyle.text}>正在加载更多</Text>
             </NativePullToRefreshFooter>
         </NativePullToRefresh>
     );
@@ -106,6 +104,12 @@ const customStyle = StyleSheet.create({
         height: 100,
         backgroundColor: '#fff000',
     },
+    footerContainer:{
+        flexDirection:'row',
+        width: '100%',
+        height: 80,
+        backgroundColor: '#ff000f',
+    },
     text: {
         width: '100%',
         textAlign: 'center',
@@ -113,6 +117,7 @@ const customStyle = StyleSheet.create({
     lottie: {
         width: 60,
         height: 60,
+        backgroundColor: '#bd36f3',
     },
     box: {
         width: '100%',

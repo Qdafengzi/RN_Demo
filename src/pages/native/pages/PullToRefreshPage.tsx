@@ -74,7 +74,7 @@ export const PullToRefreshPage: React.FC = () => {
         setTimeout(() => {
             setIsLoadMore(false);
             setList([...list, ...newItems]);
-        }, 1000);
+        }, 300);
     }
 
     return (
@@ -87,6 +87,9 @@ export const PullToRefreshPage: React.FC = () => {
                 onLoadMore={loadMore}
                 children={
                     <FlashList
+                        style={{flexGrow:1,flex:1,height:'auto'}}
+                        contentContainerStyle={{padding:0}}
+                        // style={{flex:1,backgroundColor:'red'}}
                         nestedScrollEnabled={true}
                         data={list}
                         renderItem={({item}) => <Item title={item.title}/>}
@@ -131,5 +134,6 @@ const styles = StyleSheet.create({
     listBox: {
         width: '100%',
         flex: 1,
+        backgroundColor:'green',
     },
 });
