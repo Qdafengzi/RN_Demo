@@ -1,4 +1,4 @@
-import {Button, StyleSheet, View} from 'react-native';
+import {Button, Image, StyleSheet, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {usePageReport} from '../../../hooks/usePageReport';
 import {useState} from 'react';
@@ -7,7 +7,7 @@ import {Text} from 'react-native-gesture-handler';
 import RTNSliderNativeComponent from '../../../../specs/RTNComposeSliderNativeComponent.ts';
 
 export const NativeComposeSliderScreen = () => {
-    const {colors} = useTheme();
+    useTheme();
     usePageReport('ButtonDetailScreen');
     const [progress, setProgress] = useState(0);
 
@@ -21,6 +21,7 @@ export const NativeComposeSliderScreen = () => {
                 min={0}
                 value={progress}
                 text={'Zoom'}
+                thumb={Image.resolveAssetSource(require('../../../assets/images/ic_home.png'))}
                 onProgress={(e) => {
                     setProgress(e.nativeEvent.progress);
                     console.log('value changed', e.nativeEvent.progress);

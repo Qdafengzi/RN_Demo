@@ -1,5 +1,6 @@
 package com.rn_demo.bridge.compose.slider
 
+import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -24,6 +25,16 @@ class ComposeViewModel : ViewModel() {
 
     fun updateMax(max: Float) {
         _sliderStateValue.update { it.copy(max = max) }
+    }
+
+    fun setThumbBitmap(bitmap: Bitmap){
+        _sliderStateValue.update { it.copy(thumbBitmap = bitmap) }
+    }
+
+    fun setThumbUri(uri:String){
+        _sliderStateValue.update {
+            it.copy(thumbUri = uri)
+        }
     }
 
 

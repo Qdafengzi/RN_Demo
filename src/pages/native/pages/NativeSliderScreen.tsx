@@ -5,6 +5,7 @@ import RTNSliderNativeComponent from '../../../../specs/RTNSliderNativeComponent
 import { useState } from 'react';
 import React from 'react';
 import { Text } from 'react-native-gesture-handler';
+import FastImage from "@d11/react-native-fast-image";
 
 export const NativeSliderScreen = () => {
     const { colors } = useTheme();
@@ -32,6 +33,11 @@ export const NativeSliderScreen = () => {
                     //要是一个整数
                     setProgress(Math.floor(Math.random() * 100));
                 }}
+            />
+
+            <FastImage
+                style={{width:20,height:20}}
+                defaultSource={require('../../../assets/images/ic_home.png')}
             />
 
         </View>

@@ -1,6 +1,7 @@
 package com.rn_demo.bridge.compose.slider
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import androidx.compose.ui.platform.ComposeView
@@ -62,5 +63,14 @@ class RTNSliderComposeView : LinearLayout {
 
     fun setValue(value: Int) {
         viewModel.updateProgress(value.toFloat())
+    }
+
+    fun setThumb(bitmap: Bitmap){
+        viewModel.setThumbBitmap(bitmap)
+    }
+
+    fun setThumbUri(uri:String){
+        viewModel.setThumbUri(uri)
+
     }
 }

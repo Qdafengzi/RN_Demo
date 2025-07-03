@@ -21,7 +21,7 @@
    - 文本
    - webview
    - slider
-   - sliderCompose版本
+   - sliderCompose版本 传递thumb图片 (传递资源难点)
    - PullToRefresh
 
 ### 4. 其他
