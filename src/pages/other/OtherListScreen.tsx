@@ -6,6 +6,7 @@ import React from 'react';
 const otherList = [
     {id: '1', title: 'useState', route: 'useState'},
     {id: '2', title: 'NativeEvent', route: 'NativeEvent'},
+    {id: '3', title: 'ReducerDemo', route: 'ReducerDemo'},
 
 ];
 
@@ -14,6 +15,7 @@ export type ComponentStackParamList = {
     OtherList: undefined;
     useState: undefined;
     NativeEvent: undefined;
+    ReducerDemo: undefined;
 };
 
 
