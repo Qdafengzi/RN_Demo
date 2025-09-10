@@ -5,7 +5,7 @@ import RTNSliderNativeComponent from '../../../../specs/RTNSliderNativeComponent
 import { useState } from 'react';
 import React from 'react';
 import { Text } from 'react-native-gesture-handler';
-import FastImage from "@d11/react-native-fast-image";
+import FastImage from '@d11/react-native-fast-image';
 
 export const NativeSliderScreen = () => {
     const { colors } = useTheme();

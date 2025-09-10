@@ -8,6 +8,7 @@ import {ComponentStackParamList, OtherListScreen} from './OtherListScreen.tsx';
 const UseStateDetailScreen = lazy(() => import('./UseStateScreen').then(module => ({default: module.UseStateScreen})));
 const NativeEvent = lazy(() => import('./NativeEvent').then(module => ({default: module.NativeEvent})));
 const ReducerDemo = lazy(() => import('./ReducerDemo').then(module => ({default: module.ReducerDemo})));
+const ZustandDemo = lazy(() => import('./ZustandDemo').then(module => ({default: module.ZustandDemo})));
 
 const Stack = createStackNavigator<ComponentStackParamList>();
 
@@ -32,6 +33,12 @@ const LazyReducerDemo = () => (
 );
 
 
+const LazyZustandDemo = () => (
+    <Suspense fallback={<LoadingScreen/>}>
+        <ZustandDemo/>
+    </Suspense>
+);
+
 
 // 主组件页面，包含嵌套导航
 export const OtherScreen: React.FC = () => {
@@ -54,6 +61,7 @@ export const OtherScreen: React.FC = () => {
             <Stack.Screen name="useState" component={LazyUseStateScreen} options={{title: 'useState'}}/>
             <Stack.Screen name="NativeEvent" component={LazyNativeEvent} options={{title: 'NativeEvent'}}/>
             <Stack.Screen name="ReducerDemo" component={LazyReducerDemo} options={{title: 'ReducerDemo'}}/>
+            <Stack.Screen name="ZustandDemo" component={LazyZustandDemo} options={{title: 'ZustandDemo'}}/>
         </Stack.Navigator>
     );
 };
