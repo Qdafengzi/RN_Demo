@@ -8,6 +8,7 @@ const otherList = [
     {id: '2', title: 'NativeEvent', route: 'NativeEvent'},
     {id: '3', title: 'ReducerDemo', route: 'ReducerDemo'},
     {id: '4', title: 'ZustandDemo', route: 'ZustandDemo'},
+    {id: '5', title: 'UseShallowDemo', route: 'UseShallowDemo'},
 
 ];
 
@@ -18,6 +19,7 @@ export type ComponentStackParamList = {
     NativeEvent: undefined;
     ReducerDemo: undefined;
     ZustandDemo: undefined;
+    UseShallowDemo: undefined;
 };
 
 
