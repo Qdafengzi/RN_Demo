@@ -66,7 +66,7 @@ const RxJSOperatorsDemo: React.FC = () => {
     const demonstrateTransformOperators = () => {
         addOutput('=== 转换操作符 ===');
 
-        // map - 转换每个值
+        //map - 转换每个值
         const mapObservable = of(1, 2, 3, 4, 5).pipe(
             map(x => x * 2)
         );
@@ -150,7 +150,7 @@ const RxJSOperatorsDemo: React.FC = () => {
         // debounceTime - 防抖
         const debounceObservable = interval(100).pipe(
             take(10),
-            debounceTime(200)
+            debounceTime(90)
         );
         const debounceSub = debounceObservable.subscribe(value => addOutput(`debounce: ${value}`));
         setSubscriptions(prev => [...prev, debounceSub]);

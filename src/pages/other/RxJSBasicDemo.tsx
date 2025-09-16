@@ -34,8 +34,13 @@ const RxJSBasicDemo: React.FC = () => {
         // 1.1 使用 of 创建同步数据流
         const ofObservable = of(1, 2, 3, 4, 5);
         const ofSub = ofObservable.subscribe({
-            next: value => addOutput(`of: ${value}`),
+            next: value => {
+                addOutput(`of: ${value}`);
+            },
             complete: () => addOutput('of: 完成'),
+            error: (error) => {
+                addOutput(`of error: ${error}`);
+            },
         });
         setSubscriptions(prev => [...prev, ofSub]);
 
@@ -94,9 +99,9 @@ const RxJSBasicDemo: React.FC = () => {
 
             let count = 0;
             const interval = setInterval(() => {
+                addOutput(`自定义 Observable 发送: ${count}`);
                 count++;
                 observer.next(count);
-                addOutput(`自定义 Observable 发送: ${count}`);
 
                 if (count >= 3) {
                     clearInterval(interval);
@@ -117,7 +122,6 @@ const RxJSBasicDemo: React.FC = () => {
             complete: () => addOutput('自定义订阅完成'),
             error: error => addOutput(`自定义订阅错误: ${error}`),
         });
-        setSubscriptions(prev => [...prev, customSub]);
     };
 
     // 4. 错误处理
@@ -145,7 +149,7 @@ const RxJSBasicDemo: React.FC = () => {
     const demonstrateMultipleSubscribers = () => {
         addOutput('=== 多订阅者演示 ===');
 
-        const sharedObservable = of('共享数据');
+        const sharedObservable = of('共享数据---');
 
         // 第一个订阅者
         const sub1 = sharedObservable.subscribe({
@@ -176,7 +180,6 @@ const RxJSBasicDemo: React.FC = () => {
                 }
             },
         });
-        setSubscriptions(prev => [...prev, managedSub]);
     };
 
     // 清理函数
