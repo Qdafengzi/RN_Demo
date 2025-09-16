@@ -3,7 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ComponentListScreen, ComponentStackParamList } from './ComponentListScreen';
 import { usePageReport } from '../../hooks/usePageReport';
 import {LoadingScreen} from '../../component/LoadingScreen.tsx';
-import {useTheme} from '../../theme/ThemeContext.tsx';
 // import {useTheme} from '../../theme/ThemeContext.tsx';
 
 // 使用懒加载替代直接导入
@@ -23,6 +22,7 @@ const BottomSheetScreen = lazy(() => import('./details/BottomSheetScreen').then(
 const BottomSheetScreen1 = lazy(() => import('./details/BottomSheetScreen1').then(module => ({ default: module.BottomSheetScreen1 })));
 const PullToRefresh = lazy(() => import('./details/PullToRefreshCustom.tsx').then(module => ({ default: module.PullToRefreshCustom })));
 const SVGScreen = lazy(() => import('./details/SVGScreen').then(module => ({ default: module.SVGScreen })));
+const TabRow = lazy(() => import('./details/TabRow').then(module => ({ default: module.TabRow })));
 
 const Stack = createStackNavigator<ComponentStackParamList>();
 
@@ -122,6 +122,12 @@ const LazySVGScreen= ()=>(
     </Suspense>
 );
 
+const LazyTabRow= ()=>(
+    <Suspense fallback={<LoadingScreen />}>
+        <TabRow />
+    </Suspense>
+);
+
 // 主组件页面，包含嵌套导航
 export const HomeScreen: React.FC = () => {
   usePageReport('HomeScreen');
@@ -159,6 +165,7 @@ export const HomeScreen: React.FC = () => {
         <Stack.Screen name="BottomSheetScreen1" component={LazyBottomSheetScreen1} options={{ title: 'BottomSheetScreen1' }} />
         <Stack.Screen name="PullToRefresh" component={LazyPullToRefresh} options={{ title: 'PullToRefresh' }} />
         <Stack.Screen name="SVGScreen" component={LazySVGScreen} options={{ title: 'SVGScreen' }} />
+        <Stack.Screen name="TabRow" component={LazyTabRow} options={{ title: 'TabRow' }} />
       </Stack.Navigator>
   );
 };
