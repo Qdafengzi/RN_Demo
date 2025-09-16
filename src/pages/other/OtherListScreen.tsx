@@ -9,7 +9,11 @@ const otherList = [
     {id: '3', title: 'ReducerDemo', route: 'ReducerDemo'},
     {id: '4', title: 'ZustandDemo', route: 'ZustandDemo'},
     {id: '5', title: 'UseShallowDemo', route: 'UseShallowDemo'},
-
+    {id: '6', title: 'RxJS 基础概念', route: 'RxJSBasicDemo'},
+    {id: '7', title: 'RxJS 操作符', route: 'RxJSOperatorsDemo'},
+    {id: '8', title: 'RxJS Subject', route: 'RxJSSubjectDemo'},
+    {id: '9', title: 'RxJS 实际应用', route: 'RxJSRealWorldDemo'},
+    {id: '10', title: 'RxJS 高级特性', route: 'RxJSAdvancedDemo'},
 ];
 
 // 定义导航参数类型
@@ -20,6 +24,11 @@ export type ComponentStackParamList = {
     ReducerDemo: undefined;
     ZustandDemo: undefined;
     UseShallowDemo: undefined;
+    RxJSBasicDemo: undefined;
+    RxJSOperatorsDemo: undefined;
+    RxJSSubjectDemo: undefined;
+    RxJSRealWorldDemo: undefined;
+    RxJSAdvancedDemo: undefined;
 };
 
 

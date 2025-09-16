@@ -10,6 +10,11 @@ const NativeEvent = lazy(() => import('./NativeEvent').then(module => ({default:
 const ReducerDemo = lazy(() => import('./ReducerDemo').then(module => ({default: module.ReducerDemo})));
 const ZustandDemo = lazy(() => import('./ZustandDemo').then(module => ({default: module.ZustandDemo})));
 const UseShallowDemo = lazy(() => import('./UseShallowDemo').then(module => ({default: module.UseShallowDemo})));
+const RxJSBasicDemo = lazy(() => import('./RxJSBasicDemo').then(module => ({default: module.default})));
+const RxJSOperatorsDemo = lazy(() => import('./RxJSOperatorsDemo').then(module => ({default: module.default})));
+const RxJSSubjectDemo = lazy(() => import('./RxJSSubjectDemo').then(module => ({default: module.default})));
+const RxJSRealWorldDemo = lazy(() => import('./RxJSRealWorldDemo').then(module => ({default: module.default})));
+const RxJSAdvancedDemo = lazy(() => import('./RxJSAdvancedDemo').then(module => ({default: module.default})));
 
 const Stack = createStackNavigator<ComponentStackParamList>();
 
@@ -46,6 +51,36 @@ const LazyUseShallowDemo = () => (
     </Suspense>
 );
 
+const LazyRxJSBasicDemo = () => (
+    <Suspense fallback={<LoadingScreen/>}>
+        <RxJSBasicDemo/>
+    </Suspense>
+);
+
+const LazyRxJSOperatorsDemo = () => (
+    <Suspense fallback={<LoadingScreen/>}>
+        <RxJSOperatorsDemo/>
+    </Suspense>
+);
+
+const LazyRxJSSubjectDemo = () => (
+    <Suspense fallback={<LoadingScreen/>}>
+        <RxJSSubjectDemo/>
+    </Suspense>
+);
+
+const LazyRxJSRealWorldDemo = () => (
+    <Suspense fallback={<LoadingScreen/>}>
+        <RxJSRealWorldDemo/>
+    </Suspense>
+);
+
+const LazyRxJSAdvancedDemo = () => (
+    <Suspense fallback={<LoadingScreen/>}>
+        <RxJSAdvancedDemo/>
+    </Suspense>
+);
+
 
 // 主组件页面，包含嵌套导航
 export const OtherScreen: React.FC = () => {
@@ -70,6 +105,11 @@ export const OtherScreen: React.FC = () => {
             <Stack.Screen name="ReducerDemo" component={LazyReducerDemo} options={{title: 'ReducerDemo'}}/>
             <Stack.Screen name="ZustandDemo" component={LazyZustandDemo} options={{title: 'ZustandDemo'}}/>
             <Stack.Screen name="UseShallowDemo" component={LazyUseShallowDemo} options={{title: 'UseShallowDemo'}}/>
+            <Stack.Screen name="RxJSBasicDemo" component={LazyRxJSBasicDemo} options={{title: 'RxJS 基础概念'}}/>
+            <Stack.Screen name="RxJSOperatorsDemo" component={LazyRxJSOperatorsDemo} options={{title: 'RxJS 操作符'}}/>
+            <Stack.Screen name="RxJSSubjectDemo" component={LazyRxJSSubjectDemo} options={{title: 'RxJS Subject'}}/>
+            <Stack.Screen name="RxJSRealWorldDemo" component={LazyRxJSRealWorldDemo} options={{title: 'RxJS 实际应用'}}/>
+            <Stack.Screen name="RxJSAdvancedDemo" component={LazyRxJSAdvancedDemo} options={{title: 'RxJS 高级特性'}}/>
         </Stack.Navigator>
     );
 };
