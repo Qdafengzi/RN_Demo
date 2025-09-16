@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
 import {useTheme} from '../../theme/ThemeContext';
-import {EMPTY, from, interval, Observable, of, range, Subscription, throwError, timer} from 'rxjs';
+import {EMPTY, from, interval, Observable, of, range, Subscription, throwError, timer,} from 'rxjs';
 
 const RxJSBasicDemo: React.FC = () => {
     const {colors} = useTheme();
@@ -30,6 +30,7 @@ const RxJSBasicDemo: React.FC = () => {
     // 1. 基础 Observable 创建
     const demonstrateBasicObservables = () => {
         addOutput('=== 基础 Observable 创建 ===');
+
         // 1.1 使用 of 创建同步数据流
         const ofObservable = of(1, 2, 3, 4, 5);
         const ofSub = ofObservable.subscribe({
@@ -70,7 +71,6 @@ const RxJSBasicDemo: React.FC = () => {
                 }
             },
         });
-        setSubscriptions(prev => [...prev, intervalSub]);
 
         // 2.2 timer - 延迟定时器
         const timerObservable = timer(2000, 1000);
@@ -83,7 +83,6 @@ const RxJSBasicDemo: React.FC = () => {
                 }
             },
         });
-        setSubscriptions(prev => [...prev, timerSub]);
     };
 
     // 3. 自定义 Observable
