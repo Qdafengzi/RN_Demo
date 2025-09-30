@@ -1,12 +1,13 @@
 import React, { lazy, Suspense, useRef, useState } from 'react';
-import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native';
+import {DarkTheme, DefaultTheme, NavigationContainer, NavigationContainerRef} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { ThemeProvider, useTheme } from './src/theme/ThemeContext';
-import { Image, LogBox, StatusBar } from 'react-native';
+import {Appearance, Image, LogBox, Platform, StatusBar, useColorScheme} from 'react-native';
 import { LoadingScreen } from './src/component/LoadingScreen';
 import { enableScreens } from 'react-native-screens';
 import { SafeAreaView} from 'react-native-safe-area-context';
+import {MyTheme} from "./src/theme/colors.ts";
 
 // 启用屏幕优化
 enableScreens();
@@ -46,6 +47,11 @@ function MainNavigator() {
     const { colors } = useTheme();
     const navigationRef = useRef<NavigationContainerRef<any>>(null);
     const [tabBarHide, setTabBarHide] = useState(false);
+
+    // React.useEffect(() => {
+    //     const colorScheme = MyTheme.dark ? 'dark' : 'light';
+    //     Appearance.setColorScheme(colorScheme);
+    // }, [MyTheme]);
 
     return (
         <SafeAreaView style={{ flex: 1 }} >
