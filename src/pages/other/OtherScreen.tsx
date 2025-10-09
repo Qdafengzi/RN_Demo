@@ -15,6 +15,7 @@ const RxJSOperatorsDemo = lazy(() => import('./RxJSOperatorsDemo').then(module =
 const RxJSSubjectDemo = lazy(() => import('./RxJSSubjectDemo').then(module => ({default: module.default})));
 const RxJSRealWorldDemo = lazy(() => import('./RxJSRealWorldDemo').then(module => ({default: module.default})));
 const RxJSAdvancedDemo = lazy(() => import('./RxJSAdvancedDemo').then(module => ({default: module.default})));
+const FileUploadDemo = lazy(() => import('./FileUploadDemo').then(module => ({default: module.default})));
 
 const Stack = createStackNavigator<ComponentStackParamList>();
 
@@ -81,6 +82,12 @@ const LazyRxJSAdvancedDemo = () => (
     </Suspense>
 );
 
+const LazyFileUploadDemo = () => (
+    <Suspense fallback={<LoadingScreen/>}>
+        <FileUploadDemo/>
+    </Suspense>
+);
+
 
 // 主组件页面，包含嵌套导航
 export const OtherScreen: React.FC = () => {
@@ -110,6 +117,7 @@ export const OtherScreen: React.FC = () => {
             <Stack.Screen name="RxJSSubjectDemo" component={LazyRxJSSubjectDemo} options={{title: 'RxJS Subject'}}/>
             <Stack.Screen name="RxJSRealWorldDemo" component={LazyRxJSRealWorldDemo} options={{title: 'RxJS 实际应用'}}/>
             <Stack.Screen name="RxJSAdvancedDemo" component={LazyRxJSAdvancedDemo} options={{title: 'RxJS 高级特性'}}/>
+            <Stack.Screen name="FileUploadDemo" component={LazyFileUploadDemo} options={{title: 'FileUploadDemo'}}/>
         </Stack.Navigator>
     );
 };
