@@ -1,8 +1,10 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     id("com.facebook.react")
-//    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 react {
@@ -10,17 +12,18 @@ react {
 }
 
 val enableProguardInReleaseBuilds = false
-val jscFlavor = "org.webkit:android-jsc:+"
+val jscFlavor = "io.github.react-native-community:jsc-android:2026004.+"
+
 
 android {
-    ndkVersion = rootProject.extra["ndkVersion"] as String
-    compileSdk = rootProject.extra["compileSdkVersion"] as Int
+    ndkVersion = libs.versions.ndkVersion.get()
+    compileSdk = libs.versions.compile.sdk.get().toInt()
     namespace = "com.rn_demo"
 
     defaultConfig {
         applicationId = "com.rn_demo"
-        minSdk = rootProject.extra["minSdkVersion"] as Int
-        targetSdk = rootProject.extra["targetSdkVersion"] as Int
+        minSdk = libs.versions.min.sdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
     }
@@ -61,14 +64,14 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_17
+        }
+    }
     buildFeatures {
         compose = true
         dataBinding = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.15"
     }
 }
 
@@ -82,38 +85,24 @@ dependencies {
         implementation(jscFlavor)
     }
 
-    val composeBom = platform("androidx.compose:compose-bom:2025.06.01")
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
 
-    // Choose one of the following:
-    // Material Design 3
-    implementation("androidx.compose.material3:material3")
-    // or Material Design 2
-    implementation("androidx.compose.material:material")
-    // or skip Material Design and build directly on top of foundational components
-    implementation("androidx.compose.foundation:foundation")
-    // or only import the main APIs for the underlying toolkit systems,
-    // such as input and measurement/layout
-    implementation("androidx.compose.ui:ui")
-
-    // Android Studio Preview support
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-
-    // UI Tests
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
-
-    implementation("androidx.compose.material:material-icons-extended")
+    debugImplementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    debugImplementation(libs.androidx.compose.ui.test.junit4)
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
     // Optional - Add window size utils
-    implementation("androidx.compose.material3.adaptive:adaptive")
+    implementation("androidx.compose.material3.adaptive:adaptive:1.1.0")
 
-    // Optional - Integration with activities
-    implementation("androidx.activity:activity-compose:1.10.1")
-    implementation("com.airbnb.android:lottie-compose:6.6.7")
-    // Optional - Integration with ViewModels
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.1")
+    implementation(libs.lottie.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+
 
     implementation("io.github.scwang90:refresh-layout-kernel:3.0.0-alpha")      //核心必须依赖
     implementation("io.github.scwang90:refresh-header-classics:3.0.0-alpha")    //经典刷新头

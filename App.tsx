@@ -1,13 +1,12 @@
 import React, { lazy, Suspense, useRef, useState } from 'react';
-import {DarkTheme, DefaultTheme, NavigationContainer, NavigationContainerRef} from '@react-navigation/native';
+import {NavigationContainer, NavigationContainerRef} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { ThemeProvider, useTheme } from './src/theme/ThemeContext';
-import {Appearance, Image, LogBox, Platform, StatusBar, useColorScheme} from 'react-native';
+import {Image, LogBox, StatusBar} from 'react-native';
 import { LoadingScreen } from './src/component/LoadingScreen';
 import { enableScreens } from 'react-native-screens';
 import { SafeAreaView} from 'react-native-safe-area-context';
-import {MyTheme} from "./src/theme/colors.ts";
 
 // 启用屏幕优化
 enableScreens();

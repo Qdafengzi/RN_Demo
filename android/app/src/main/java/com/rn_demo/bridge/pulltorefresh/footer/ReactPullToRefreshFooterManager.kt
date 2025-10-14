@@ -40,10 +40,10 @@ class ReactPullToRefreshFooterManager : ViewGroupManager<ReactPullToRefreshFoote
 
     }
 
-    override fun addViews(parent: ReactPullToRefreshFooter, views: MutableList<View>) {
-        super.addViews(parent, views)
-        XLogger.d("添加  addViews :${views.size}")
-    }
+//    override fun addViews(parent: ReactPullToRefreshFooter, views: MutableList<View>) {
+//        super.addViews(parent, views)
+//        XLogger.d("添加  addViews :${views.size}")
+//    }
 
     override fun addView(parent: ReactPullToRefreshFooter, child: View, index: Int) {
         super.addView(parent, child, index)

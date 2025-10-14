@@ -1,10 +1,19 @@
+
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.compose) apply false
+    alias(libs.plugins.androidLib) apply false
+}
+
+
 buildscript {
-    val buildToolsVersion by extra("35.0.0")
-    val minSdkVersion by extra(28)
-    val compileSdkVersion by extra(35)
-    val targetSdkVersion by extra(35)
-    val ndkVersion by extra("26.1.10909125")
-    val kotlinVersion by extra("1.9.24")
+    val buildToolsVersion by extra("36.0.0")
+    val minSdkVersion by extra(libs.versions.min.sdk.get().toInt())
+    val compileSdkVersion by extra(libs.versions.compile.sdk.get().toInt())
+    val targetSdkVersion by extra(libs.versions.targetSdk.get().toInt())
+    val ndkVersion by extra(libs.versions.ndkVersion.get())
+    val kotlinVersion by extra(libs.versions.kotlin.get())
     val agpVersion by extra("8.11.0")
     val agp_version by extra("8.11.0")
 
@@ -14,10 +23,7 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:$agp_version")
         classpath("com.facebook.react:react-native-gradle-plugin")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-//        classpath("org.jetbrains.kotlin:compose-compiler-gradle-plugin:$kotlinVersion")
     }
 }
 

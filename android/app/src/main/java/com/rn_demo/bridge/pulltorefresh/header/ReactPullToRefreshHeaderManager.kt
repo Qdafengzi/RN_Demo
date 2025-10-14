@@ -70,10 +70,10 @@ class ReactPullToRefreshHeaderManager : ViewGroupManager<ReactPullToRefreshHeade
         view?.setIsRefreshing(value)
     }
 
-    override fun addViews(parent: ReactPullToRefreshHeader, views: MutableList<View>) {
-        super.addViews(parent, views)
-        XLogger.d("添加  addViews :${views.size}")
-    }
+//    override fun addViews(parent: ReactPullToRefreshHeader, views: MutableList<View>) {
+//        super.addViews(parent, views)
+//        XLogger.d("添加  addViews :${views.size}")
+//    }
 
     override fun addView(parent: ReactPullToRefreshHeader, child: View, index: Int) {
         super.addView(parent, child, index)
