@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useRef, useState } from 'react';
+import React, {lazy, Suspense, useEffect, useRef, useState} from 'react';
 import {NavigationContainer, NavigationContainerRef} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -7,6 +7,7 @@ import {Image, LogBox, StatusBar} from 'react-native';
 import { LoadingScreen } from './src/component/LoadingScreen';
 import { enableScreens } from 'react-native-screens';
 import { SafeAreaView} from 'react-native-safe-area-context';
+import SystemNavigationBar from "react-native-system-navigation-bar";
 
 // 启用屏幕优化
 enableScreens();
@@ -46,6 +47,14 @@ function MainNavigator() {
     const { colors } = useTheme();
     const navigationRef = useRef<NavigationContainerRef<any>>(null);
     const [tabBarHide, setTabBarHide] = useState(false);
+
+
+    useEffect(() => {
+        // SystemNavigationBar.fullScreen(true);
+        // SystemNavigationBar.immersive();
+        // SystemNavigationBar.navigationShow()
+        SystemNavigationBar.setNavigationColor('red')
+    })
 
     // React.useEffect(() => {
     //     const colorScheme = MyTheme.dark ? 'dark' : 'light';
