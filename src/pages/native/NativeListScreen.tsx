@@ -9,6 +9,7 @@ const nativeList = [
     {id: '3', title: 'Slider', route: 'SliderScreen'},
     {id: '4', title: 'SliderCompose', route: 'SliderComposeScreen'},
     {id: '5', title: 'PullToRefreshPage', route: 'PullToRefreshPage'},
+    {id: '6', title: 'ViewPagerPage', route: 'ViewPagerPage'},
 ];
 
 // 定义导航参数类型
@@ -19,6 +20,7 @@ export type NativeStackParamList = {
     SliderScreen: undefined;
     SliderComposeScreen: undefined;
     PullToRefreshPage: undefined;
+    ViewPagerPage: undefined;
 };
 
 
