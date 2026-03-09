@@ -15,6 +15,7 @@ const otherList = [
     {id: '9', title: 'RxJS 实际应用', route: 'RxJSRealWorldDemo'},
     {id: '10', title: 'RxJS 高级特性', route: 'RxJSAdvancedDemo'},
     {id: '11', title: 'FileUploadDemo', route: 'FileUploadDemo'},
+    {id: '12', title: 'FlatListDemo', route: 'FlatListDemo'},
 ];
 
 // 定义导航参数类型
@@ -31,6 +32,7 @@ export type ComponentStackParamList = {
     RxJSRealWorldDemo: undefined;
     RxJSAdvancedDemo: undefined;
     FileUploadDemo: undefined;
+    FlatListDemo: undefined;
 };
 
 
