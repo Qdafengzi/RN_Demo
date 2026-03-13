@@ -17,6 +17,10 @@ const RxJSRealWorldDemo = lazy(() => import('./RxJSRealWorldDemo').then(module =
 const RxJSAdvancedDemo = lazy(() => import('./RxJSAdvancedDemo').then(module => ({default: module.default})));
 const FileUploadDemo = lazy(() => import('./FileUploadDemo').then(module => ({default: module.default})));
 const FlatListDemo = lazy(() => import('./FlatListDemo').then(module => ({default: module.default})));
+const PullToRefreshPage = lazy(() => import('./PullToRefreshPage').then(module => ({default: module.default})));
+const RecyclerViewPage = lazy(() => import('./RecyclerViewPage').then(module => ({default: module.default})));
+const RecyclerViewPage2 = lazy(() => import('./RecyclerViewPage2').then(module => ({default: module.default})));
+const RecyclerViewPage3 = lazy(() => import('./RecyclerViewPage3').then(module => ({default: module.default})));
 
 const Stack = createStackNavigator<ComponentStackParamList>();
 
@@ -94,7 +98,28 @@ const LazyFlatListDemo = () => (
         <FlatListDemo/>
     </Suspense>
 );
+const LazyPullToRefreshPage = () => (
+    <Suspense fallback={<LoadingScreen/>}>
+        <PullToRefreshPage/>
+    </Suspense>
+);
 
+const LazyRecyclerViewPage = () => (
+    <Suspense fallback={<LoadingScreen/>}>
+        <RecyclerViewPage/>
+    </Suspense>
+);
+
+const LazyRecyclerViewPage2 = () => (
+    <Suspense fallback={<LoadingScreen/>}>
+        <RecyclerViewPage2/>
+    </Suspense>
+);
+const LazyRecyclerViewPage3 = () => (
+    <Suspense fallback={<LoadingScreen/>}>
+        <RecyclerViewPage3/>
+    </Suspense>
+);
 
 // 主组件页面，包含嵌套导航
 export const OtherScreen: React.FC = () => {
@@ -126,6 +151,10 @@ export const OtherScreen: React.FC = () => {
             <Stack.Screen name="RxJSAdvancedDemo" component={LazyRxJSAdvancedDemo} options={{title: 'RxJS 高级特性'}}/>
             <Stack.Screen name="FileUploadDemo" component={LazyFileUploadDemo} options={{title: 'FileUploadDemo'}}/>
             <Stack.Screen name="FlatListDemo" component={LazyFlatListDemo} options={{title: 'FlatListDemo'}}/>
+            <Stack.Screen name="PullToRefreshPage" component={LazyPullToRefreshPage} options={{title: 'PullToRefreshPage'}}/>
+            <Stack.Screen name="RecyclerViewPage" component={LazyRecyclerViewPage} options={{title: 'RecyclerViewPage'}}/>
+            <Stack.Screen name="RecyclerViewPage2" component={LazyRecyclerViewPage2} options={{title: 'RecyclerViewPage2'}}/>
+            <Stack.Screen name="RecyclerViewPage3" component={LazyRecyclerViewPage3} options={{title: 'RecyclerViewPage3'}}/>
         </Stack.Navigator>
     );
 };

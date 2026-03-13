@@ -1,7 +1,7 @@
 export const imageDataList = ["https://prestage.static.cloud.picupmedia.com/gallery/78/20260306163448338_e97e9168_thumbnail.png",
     "https://prestage.static.cloud.picupmedia.com/gallery/78/20260306163347684_c7f3945c_thumbnail.jpg",
     "https://prestage.static.cloud.picupmedia.com/gallery/78/20260306163212878_e95d93d6_thumbnail.jpg",
-    "https://prestage.static.cloud.picupmedia.com/gallery/78/20260306162355327_19f7f945_thumbnail.png",
+    "https://prestage.static.cloud.picupmedia.com/gallery/78/019cc1e6c08f75c9bc452c54306db976_39e3006a.jpg",
     "https://prestage.static.cloud.picupmedia.com/gallery/78/019cc1e6c08f75c9bc452c54306db976_39e3006a.jpg",
     "https://prestage.static.cloud.picupmedia.com/gallery/78/20260306144252902_a31ce4de_thumbnail.jpg",
     "https://prestage.static.cloud.picupmedia.com/gallery/78/20260306144043152_ed50513b_thumbnail.jpg",
