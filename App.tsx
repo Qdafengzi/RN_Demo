@@ -13,10 +13,11 @@ import {enableFreeze, enableScreens} from 'react-native-screens';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import {createStackNavigator} from '@react-navigation/stack';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 // 启用屏幕优化
-enableScreens(true);
-enableFreeze(true);
+enableScreens(false);
+enableFreeze(false);
 
 // 禁用默认加载指示器
 LogBox.ignoreLogs(['loading']);
@@ -41,6 +42,7 @@ const NavigationTestModalScreen = lazy(() =>
     }))
 );
 
+//const Stack = createNativeStackNavigator();
 const Stack = createStackNavigator();
 
 // 创建底部标签导航器
@@ -197,44 +199,48 @@ function MainNavigator() {
                 backgroundColor={colors.background}
 
             />
-            <NavigationContainer
-                fallback={null}
-                ref={navigationRef}
-                onStateChange={(_) => {
-                    const currentRouteName = navigationRef.current?.getCurrentRoute()?.name ?? '';
-                    console.log(`当前导航的:${currentRouteName}`);
-                }}
-            >
-                <Stack.Navigator
-                    initialRouteName={'MainTabScreen'}
-                    screenOptions={{
-                        headerTitleAlign: 'center',
-                        freezeOnBlur: true,
+            <GestureHandlerRootView>
+                <NavigationContainer
+                    fallback={null}
+                    ref={navigationRef}
+                    onStateChange={(_) => {
+                        const currentRouteName = navigationRef.current?.getCurrentRoute()?.name ?? '';
+                        console.log(`当前导航的:${currentRouteName}`);
                     }}
                 >
-                    <Stack.Group screenOptions={{}}>
-                        <Stack.Screen
-                            name={'MainTabScreen'}
-                            component={MainTabBarScreen}
-                            options={{headerShown: false}}
-                        />
-                        <Stack.Screen
-                            name={'NavigationTestDetail'}
-                            component={LazyNavigationTestDetailScreen}
-                            options={({route}: any) => ({
-                                title: `导航测试详情 ${route.params?.level ?? 1}`,
-                            })}
-                        />
-                    </Stack.Group>
-                    <Stack.Group screenOptions={{presentation: 'modal'}}>
-                        <Stack.Screen
-                            name={'NavigationTestModal'}
-                            component={LazyNavigationTestModalScreen}
-                            options={{title: '导航测试 Modal'}}
-                        />
-                    </Stack.Group>
-                </Stack.Navigator>
-            </NavigationContainer>
+                    <Stack.Navigator
+                        detachInactiveScreens ={false}
+                        initialRouteName={'MainTabScreen'}
+                        screenOptions={{
+                            headerTitleAlign: 'center',
+                            freezeOnBlur: false,
+                        }}
+                    >
+                        <Stack.Group screenOptions={{}}>
+                            <Stack.Screen
+                                name={'MainTabScreen'}
+                                component={MainTabBarScreen}
+                                options={{headerShown: false}}
+                            />
+                            <Stack.Screen
+                                name={'NavigationTestDetail'}
+                                component={LazyNavigationTestDetailScreen}
+                                options={({route}: any) => ({
+                                    title: `导航测试详情 ${route.params?.level ?? 1}`,
+                                })}
+                            />
+                        </Stack.Group>
+                        <Stack.Group screenOptions={{presentation: 'modal'}}>
+                            <Stack.Screen
+                                name={'NavigationTestModal'}
+                                component={LazyNavigationTestModalScreen}
+                                options={{title: '导航测试 Modal'}}
+                            />
+                        </Stack.Group>
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </GestureHandlerRootView>
+
         </SafeAreaView>
 
     );
