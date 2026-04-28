@@ -20,7 +20,7 @@ const RecyclerViewPage3: React.FC = () => {
     const {width} = Dimensions.get("window");
     const scrollRef = useRef<RecyclerListView<any, any>>(null);
     const [refreshing, setRefreshing] = useState(false);
-
+    const [isLoadMore, setIsLoadMore] = useState(false)
     const dataProvider = useMemo(() => {
         const dp = new DataProvider((r1: RowData, r2: RowData) => r1 !== r2);
         const rows: RowData[] = imageDataList.slice(0, 50).map((item) => item)
@@ -102,10 +102,11 @@ const RecyclerViewPage3: React.FC = () => {
     };
     return (
         <View style={{flex: 1, width: '100%'}}>
-            <View style={{width: '100%', height: 200}}>
+            <View style={{width: '100%', height: 100}}>
                 <RecyclerListView
                     ref={scrollRef}
                     style={{backgroundColor: "red"}}
+
                     layoutProvider={layoutProvider}
                     // scrollViewProps={{
                     //     ref: scrollRef,
@@ -142,6 +143,7 @@ const RecyclerViewPage3: React.FC = () => {
 
             <View style={{flex: 1}}>
                 <PullToRefresh
+                    style={{flex: 1}}
                     refreshing={refreshing}
                     onRefresh={() => {
                         setRefreshing(true);
@@ -149,8 +151,16 @@ const RecyclerViewPage3: React.FC = () => {
                             setRefreshing(false);
                         }, 1000)
                     }}
+                    onLoadMore={()=>{
+                        setIsLoadMore(true);
+                        setTimeout(() => {
+                            setIsLoadMore(false);
+                        }, 1000)
+                    }}
+                    loadingMore={isLoadMore}
                 >
                     <RecyclerListView
+                        style={{flex: 1}}
                         layoutProvider={layoutProvider2}
                         dataProvider={dataProvider2}
                         renderFooter={() => {

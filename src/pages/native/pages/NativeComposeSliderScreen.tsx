@@ -27,6 +27,17 @@ export const NativeComposeSliderScreen = () => {
                     console.log('value changed', e.nativeEvent.progress);
                 }}/>
 
+            <RTNSliderNativeComponent
+                style={styles.slider}
+                max={100}
+                min={0}
+                value={progress}
+                text={'Zoom'}
+                onProgress={(e) => {
+                    setProgress(e.nativeEvent.progress);
+                    console.log('value changed', e.nativeEvent.progress);
+                }}/>
+
             <Button
                 title="change"
                 onPress={() => {
